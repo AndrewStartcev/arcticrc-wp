@@ -39,20 +39,39 @@
       suppressMapOpenBlock: true
     });
 
-    parsePoints(root).forEach((point) => {
-      const lat = number(point.lat, null);
-      const lng = number(point.lng, null);
+    const points = parsePoints(root);
+    const address = (root.dataset.address || "").trim();
 
-      if (lat === null || lng === null) {
-        return;
-      }
+    if (address) {
+      window.ymaps.geocode(address, { results: 1 }).then((result) => {
+        const first = result.geoObjects.get(0);
 
-      map.geoObjects.add(new window.ymaps.Placemark(
-        [lat, lng],
-        { balloonContent: point.title || "" },
-        { preset: "islands#blueCircleDotIcon" }
-      ));
-    });
+        if (!first) {
+          return;
+        }
+
+        const coords = first.geometry.getCoordinates();
+        map.setCenter(coords, zoom);
+        first.properties.set("balloonContent", address);
+        first.options.set("preset", "islands#blueCircleDotIcon");
+        map.geoObjects.add(first);
+      });
+    } else {
+      points.forEach((point) => {
+        const lat = number(point.lat, null);
+        const lng = number(point.lng, null);
+
+        if (lat === null || lng === null) {
+          return;
+        }
+
+        map.geoObjects.add(new window.ymaps.Placemark(
+          [lat, lng],
+          { balloonContent: point.title || "" },
+          { preset: "islands#blueCircleDotIcon" }
+        ));
+      });
+    }
 
     root.dataset.mapReady = "true";
   }
