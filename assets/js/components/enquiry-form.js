@@ -282,8 +282,27 @@
   }
 
   function initAllEnquiryForms() {
-    document.querySelectorAll("form[data-enquiry-form]").forEach(initEnquiryForm);
+    document.querySelectorAll("form[data-enquiry-form], form.wpcf7-form.enquiry-form").forEach(initEnquiryForm);
   }
+
+  document.addEventListener("wpcf7mailsent", (event) => {
+    const form = event.target && event.target.querySelector
+      ? event.target.querySelector("form.wpcf7-form.enquiry-form")
+      : null;
+
+    if (form) {
+      form.reset();
+      queueMicrotask(() => syncSubmitState(form));
+    }
+
+    const dialog = event.target && event.target.closest
+      ? event.target.closest("dialog.enquiry-dialog")
+      : null;
+
+    if (dialog && window.ArcticBehaviors && typeof window.ArcticBehaviors.closeEnquiryDialog === "function") {
+      window.ArcticBehaviors.closeEnquiryDialog(dialog);
+    }
+  });
 
   window.ArcticBehaviors = window.ArcticBehaviors || {};
   window.ArcticBehaviors.initEnquiryForm = initEnquiryForm;
