@@ -28,7 +28,7 @@ function arcticrc_equipment_page_block_visible( $field_name, $page_id = 0 ) {
 	return false !== $value && '0' !== (string) $value;
 }
 
-function arcticrc_seed_equipment_item( $slug, $title, $image_path, $tags ) {
+function arcticrc_seed_equipment_item( $slug, $title, $image_path, $tags, $mode_term_ids = array() ) {
 	$post = get_page_by_path( $slug, OBJECT, 'equipment' );
 
 	if ( ! $post ) {
@@ -66,7 +66,9 @@ function arcticrc_seed_equipment_item( $slug, $title, $image_path, $tags ) {
 		update_field( 'field_arcticrc_equipment_tags', $rows, $post_id );
 	}
 
-	wp_set_object_terms( $post_id, array( 'rent', 'sale' ), 'equipment_mode', false );
+	if ( $mode_term_ids ) {
+		wp_set_object_terms( $post_id, array_map( 'intval', $mode_term_ids ), 'equipment_mode', false );
+	}
 
 	return (int) $post_id;
 }
@@ -76,12 +78,24 @@ function arcticrc_seed_equipment_pages() {
 		return;
 	}
 
-	if ( ! term_exists( 'rent', 'equipment_mode' ) ) {
-		wp_insert_term( 'Аренда', 'equipment_mode', array( 'slug' => 'rent' ) );
+	$rent_term = term_exists( 'rent', 'equipment_mode' );
+	if ( ! $rent_term ) {
+		$rent_term = wp_insert_term( 'Аренда', 'equipment_mode', array( 'slug' => 'rent' ) );
 	}
 
-	if ( ! term_exists( 'sale', 'equipment_mode' ) ) {
-		wp_insert_term( 'Продажа', 'equipment_mode', array( 'slug' => 'sale' ) );
+	$sale_term = term_exists( 'sale', 'equipment_mode' );
+	if ( ! $sale_term ) {
+		$sale_term = wp_insert_term( 'Продажа', 'equipment_mode', array( 'slug' => 'sale' ) );
+	}
+
+	$mode_term_ids = array();
+
+	foreach ( array( $rent_term, $sale_term ) as $term_result ) {
+		if ( is_array( $term_result ) && ! empty( $term_result['term_id'] ) ) {
+			$mode_term_ids[] = (int) $term_result['term_id'];
+		} elseif ( is_numeric( $term_result ) ) {
+			$mode_term_ids[] = (int) $term_result;
+		}
 	}
 
 	$items = array(
@@ -89,31 +103,36 @@ function arcticrc_seed_equipment_pages() {
 			'drilling-rigs',
 			'Буровые установки',
 			'media/web/ea3c9f4f69acc28f6a8d77f0a216f02c510b09ec.webp',
-			array( 'УРБ-2А2', 'ЛБУ-50', 'УБМ-831' )
+			array( 'УРБ-2А2', 'ЛБУ-50', 'УБМ-831' ),
+			$mode_term_ids
 		),
 		arcticrc_seed_equipment_item(
 			'piling-equipment',
 			'Сваебойная техника',
 			'media/web/equipment-card-01.webp',
-			array( 'Установка УТЗ СП49' )
+			array( 'Установка УТЗ СП49' ),
+			$mode_term_ids
 		),
 		arcticrc_seed_equipment_item(
 			'testing-equipment',
 			'Испытательное оборудование',
 			'media/web/6d1d47da8d7a18471f4ec54337bfcfe2acc1c35c.webp',
-			array( 'Домкраты', 'Стенды', 'Упорные конструкции' )
+			array( 'Домкраты', 'Стенды', 'Упорные конструкции' ),
+			$mode_term_ids
 		),
 		arcticrc_seed_equipment_item(
 			'measuring-equipment',
 			'Измерительное оборудование',
 			'media/web/81c10552a5126a65fc6661768370e13cc9e21ff2.webp',
-			array( 'Цифровые манометры', 'Индикаторы', 'Датчики' )
+			array( 'Цифровые манометры', 'Индикаторы', 'Датчики' ),
+			$mode_term_ids
 		),
 		arcticrc_seed_equipment_item(
 			'special-equipment',
 			'Специальная техника',
 			'media/web/ecc90feff0e7e1b50a78250865dd498f33be5a7d.webp',
-			array( 'Техника для проведения работ на объектах' )
+			array( 'Техника для проведения работ на объектах' ),
+			$mode_term_ids
 		),
 	);
 	$items = array_values( array_filter( $items ) );
