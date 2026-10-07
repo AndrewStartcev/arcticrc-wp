@@ -7,7 +7,7 @@
             "label": "Основное",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -61,7 +61,7 @@
             "label": "Контакты",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -112,7 +112,7 @@
             "label": "Соцсети",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -173,7 +173,7 @@
             "label": "Реквизиты",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -234,7 +234,7 @@
             "label": "Интеграции",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -254,7 +254,7 @@
             "label": "Документы",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -312,5 +312,5 @@
     "active": true,
     "description": "Общие данные сайта. Всё, что повторяется в нескольких шаблонах, хранится здесь.",
     "show_in_rest": 0,
-    "modified": 1791388000
+    "modified": 1791390500
 }
