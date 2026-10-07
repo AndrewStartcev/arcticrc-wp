@@ -24,8 +24,8 @@ function arcticrc_register_options_page() {
 
 	acf_add_options_page(
 		array(
-			'page_title' => 'Настройки ArcticRC',
-			'menu_title' => 'ArcticRC',
+			'page_title' => 'Глобальные настройки сайта',
+			'menu_title' => 'Сайт',
 			'menu_slug'  => 'arcticrc-settings',
 			'capability' => 'manage_options',
 			'redirect'   => false,
