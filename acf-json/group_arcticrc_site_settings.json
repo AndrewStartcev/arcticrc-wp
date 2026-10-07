@@ -230,6 +230,26 @@
             }
         },
         {
+            "key": "field_arcticrc_tab_integrations",
+            "label": "Интеграции",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_yandex_maps_api_key",
+            "label": "API-ключ Яндекс.Карт",
+            "name": "yandex_maps_api_key",
+            "type": "password",
+            "instructions": "Используется для интерактивных карт на сайте. Текущий ключ временный — позже замените его здесь.",
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
             "key": "field_arcticrc_tab_legal",
             "label": "Документы",
             "name": "",
@@ -292,5 +312,5 @@
     "active": true,
     "description": "Общие данные сайта. Всё, что повторяется в нескольких шаблонах, хранится здесь.",
     "show_in_rest": 0,
-    "modified": 1791384000
+    "modified": 1791388000
 }
