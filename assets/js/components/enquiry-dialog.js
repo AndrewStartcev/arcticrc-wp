@@ -9,7 +9,7 @@
   }
 
   function setDialogContext(dialog, opener) {
-    const form = dialog.querySelector("form[data-enquiry-form]");
+    const form = dialog.querySelector("form[data-enquiry-form], form.wpcf7-form.enquiry-form");
     if (!form) {
       return;
     }
@@ -27,7 +27,7 @@
   }
 
   function focusDialogStart(dialog) {
-    const form = dialog.querySelector("form[data-enquiry-form]");
+    const form = dialog.querySelector("form[data-enquiry-form], form.wpcf7-form.enquiry-form");
     const name = form && form.querySelector('[name="name"]');
     const heading = dialog.querySelector("[data-dialog-heading]");
     const target = name || heading;
