@@ -258,18 +258,13 @@
 
     form.querySelectorAll('input[type="tel"]').forEach(initPhoneInput);
 
-    // This listener is deliberately registered before a checked consent can
-    // enable the native submit control. The static demo never sends a request.
     form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
       syncPhoneInputs(form);
 
-      if (!consent.checked) {
-        return;
+      if (!consent.checked || !form.checkValidity()) {
+        event.preventDefault();
+        form.reportValidity();
       }
-
-      form.reportValidity();
     });
 
     consent.addEventListener("change", () => {
@@ -290,7 +285,31 @@
     document.querySelectorAll("form[data-enquiry-form], form.wpcf7-form.enquiry-form").forEach(initEnquiryForm);
   }
 
+  function showEnquiryToast(type, title, message) {
+    let toast = document.querySelector(".enquiry-toast");
+
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "enquiry-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      toast.innerHTML = '<button class="enquiry-toast__close" type="button" aria-label="Закрыть">×</button><strong class="enquiry-toast__title"></strong><p class="enquiry-toast__text"></p>';
+      document.body.appendChild(toast);
+      toast.querySelector(".enquiry-toast__close").addEventListener("click", () => toast.classList.remove("enquiry-toast--visible"));
+    }
+
+    toast.classList.remove("enquiry-toast--success", "enquiry-toast--error");
+    toast.classList.add(type === "success" ? "enquiry-toast--success" : "enquiry-toast--error");
+    toast.querySelector(".enquiry-toast__title").textContent = title;
+    toast.querySelector(".enquiry-toast__text").textContent = message;
+    requestAnimationFrame(() => toast.classList.add("enquiry-toast--visible"));
+
+    window.clearTimeout(showEnquiryToast.timer);
+    showEnquiryToast.timer = window.setTimeout(() => toast.classList.remove("enquiry-toast--visible"), 5000);
+  }
+
   document.addEventListener("wpcf7mailsent", (event) => {
+    showEnquiryToast("success", "Заявка отправлена", "Спасибо! Мы получили ваши контакты и свяжемся с вами.");
     const form = event.target && event.target.querySelector
       ? event.target.querySelector("form.wpcf7-form.enquiry-form")
       : null;
@@ -307,6 +326,12 @@
     if (dialog && window.ArcticBehaviors && typeof window.ArcticBehaviors.closeEnquiryDialog === "function") {
       window.ArcticBehaviors.closeEnquiryDialog(dialog);
     }
+  });
+
+  ["wpcf7invalid", "wpcf7spam", "wpcf7mailfailed"].forEach((eventName) => {
+    document.addEventListener(eventName, () => {
+      showEnquiryToast("error", "Не удалось отправить", "Проверьте поля формы и попробуйте ещё раз.");
+    });
   });
 
   window.ArcticBehaviors = window.ArcticBehaviors || {};
