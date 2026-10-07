@@ -70,7 +70,7 @@ if ( is_page( 'equipment-rent' ) ) {
 	$dialog_purpose = 'sale';
 }
 ?>
-<dialog class="enquiry-dialog<?php echo 'equipment' === $dialog_variant ? ' enquiry-dialog--equipment' : ''; ?>" id="enquiry-dialog" aria-labelledby="modal-title">
+<dialog class="enquiry-dialog<?php echo 'equipment' === $dialog_variant ? ' enquiry-dialog--equipment' : ''; ?>" id="enquiry-dialog" aria-label="Форма заявки">
 	<div class="enquiry-dialog__panel" data-dialog-panel>
 		<button class="enquiry-dialog__close" type="button" data-dialog-close aria-label="Закрыть форму">×</button>
 		<?php
