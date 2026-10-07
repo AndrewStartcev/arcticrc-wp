@@ -36,7 +36,7 @@ function arcticrc_register_content_types() {
 			'public'       => true,
 			'show_in_rest' => false,
 			'menu_icon'    => 'dashicons-hammer',
-			'has_archive'  => 'services',
+			'has_archive'  => false,
 			'rewrite'      => array(
 				'slug'       => 'service-item',
 				'with_front' => false,
