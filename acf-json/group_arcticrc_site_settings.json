@@ -3,6 +3,59 @@
     "title": "Глобальные настройки сайта",
     "fields": [
         {
+            "key": "field_arcticrc_tab_main",
+            "label": "Основное",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_logo_light",
+            "label": "Логотип — светлый",
+            "name": "site_logo_light",
+            "type": "image",
+            "instructions": "Используется на главной и в шапке поверх фоновых изображений.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "mime_types": "svg,png,webp",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_logo_blue",
+            "label": "Логотип — синий",
+            "name": "site_logo_blue",
+            "type": "image",
+            "instructions": "Используется на светлых внутренних страницах.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "mime_types": "svg,png,webp",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_copyright",
+            "label": "Копирайт",
+            "name": "site_copyright",
+            "type": "text",
+            "default_value": "Все права защищены",
+            "placeholder": "Все права защищены",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
             "key": "field_arcticrc_tab_contacts",
             "label": "Контакты",
             "name": "",
@@ -19,7 +72,12 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": ""
+            "maxlength": "",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
         },
         {
             "key": "field_arcticrc_site_email",
@@ -27,23 +85,12 @@
             "name": "site_email",
             "type": "email",
             "default_value": "engineering@arcticrc.ru",
-            "placeholder": ""
-        },
-        {
-            "key": "field_arcticrc_site_telegram_url",
-            "label": "Telegram",
-            "name": "site_telegram_url",
-            "type": "url",
-            "default_value": "https://telegram.org/",
-            "placeholder": "https://t.me/..."
-        },
-        {
-            "key": "field_arcticrc_site_whatsapp_url",
-            "label": "WhatsApp",
-            "name": "site_whatsapp_url",
-            "type": "url",
-            "default_value": "https://www.whatsapp.com/",
-            "placeholder": "https://wa.me/..."
+            "placeholder": "",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
         },
         {
             "key": "field_arcticrc_site_address",
@@ -51,8 +98,86 @@
             "name": "site_address",
             "type": "textarea",
             "default_value": "Москва, 2-й Кожевнический пер, д.1, помещ. 1-H",
-            "rows": 3,
-            "new_lines": ""
+            "rows": 2,
+            "new_lines": "",
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_tab_socials",
+            "label": "Соцсети",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_site_socials",
+            "label": "Социальные сети и мессенджеры",
+            "name": "site_socials",
+            "type": "repeater",
+            "instructions": "Можно добавлять любые сети и мессенджеры: Telegram, WhatsApp, MAX и другие.",
+            "layout": "block",
+            "button_label": "Добавить соцсеть",
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_arcticrc_social_name",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_social_icon",
+                    "label": "Иконка",
+                    "name": "icon",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "mime_types": "svg,png,webp",
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_social_name",
+                    "label": "Название",
+                    "name": "name",
+                    "type": "text",
+                    "placeholder": "Telegram",
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_social_url",
+                    "label": "Ссылка",
+                    "name": "url",
+                    "type": "url",
+                    "placeholder": "https://...",
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_social_link_text",
+                    "label": "Текст ссылки",
+                    "name": "link_text",
+                    "type": "text",
+                    "placeholder": "Telegram",
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ]
         },
         {
             "key": "field_arcticrc_tab_company",
@@ -69,9 +194,11 @@
             "type": "text",
             "default_value": "ООО \"ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ\"",
             "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
         },
         {
             "key": "field_arcticrc_site_inn",
@@ -80,9 +207,11 @@
             "type": "text",
             "default_value": "9721265458",
             "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            }
         },
         {
             "key": "field_arcticrc_site_kpp",
@@ -91,9 +220,59 @@
             "type": "text",
             "default_value": "772101001",
             "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_site_legal_address",
+            "label": "Юридический адрес",
+            "name": "site_legal_address",
+            "type": "textarea",
+            "default_value": "г. Москва, ул Михайлова, д 31А, кв 404",
+            "rows": 2,
+            "new_lines": "",
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_tab_legal",
+            "label": "Документы",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_privacy_url",
+            "label": "Политика конфиденциальности",
+            "name": "site_privacy_url",
+            "type": "url",
+            "default_value": "/policy/",
+            "placeholder": "/policy/",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_personal_data_url",
+            "label": "Согласие на обработку ПДн",
+            "name": "site_personal_data_url",
+            "type": "url",
+            "default_value": "/privacy/",
+            "placeholder": "/privacy/",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
         }
     ],
     "location": [
@@ -112,7 +291,7 @@
     "instruction_placement": "label",
     "hide_on_screen": [],
     "active": true,
-    "description": "Общие данные сайта, используемые в шапке, подвале и контактных блоках.",
+    "description": "Общие данные сайта. Всё, что повторяется в нескольких шаблонах, хранится здесь.",
     "show_in_rest": 0,
-    "modified": 1791378000
+    "modified": 1791381720
 }
