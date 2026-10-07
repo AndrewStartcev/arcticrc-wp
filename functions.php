@@ -7,6 +7,7 @@ foreach ( array(
 	'/functions/acf.php',
 	'/functions/helpers.php',
 	'/functions/post-types.php',
+	'/functions/base-content.php',
 	'/functions/remove-functions.php',
 ) as $arcticrc_file ) {
 	require_once get_template_directory() . $arcticrc_file;
