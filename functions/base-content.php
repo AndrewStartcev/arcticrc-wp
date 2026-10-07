@@ -279,6 +279,42 @@ function arcticrc_seed_base_content() {
 add_action( 'admin_init', 'arcticrc_seed_base_content', 30 );
 
 /**
+ * Replace repeated values from the source markup with current global settings.
+ */
+function arcticrc_apply_global_markup( $markup ) {
+	$phone             = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
+	$email             = arcticrc_option( 'site_email', 'engineering@arcticrc.ru' );
+	$office_address    = arcticrc_option( 'site_address', 'Москва, 2-й Кожевнический пер, д.1, помещ. 1-H' );
+	$privacy_url       = arcticrc_option( 'site_privacy_url', '/policy/' );
+	$personal_data_url = arcticrc_option( 'site_personal_data_url', '/privacy/' );
+	$socials           = arcticrc_socials();
+
+	$replacements = array(
+		'+7(916)-616-02-20'                              => $phone,
+		'tel:+79166160220'                               => 'tel:' . arcticrc_phone_href( $phone ),
+		'engineering@arcticrc.ru'                        => $email,
+		'mailto:engineering@arcticrc.ru'                 => 'mailto:' . sanitize_email( $email ),
+		'Москва, 2-й Кожевнический пер, д.1, помещ. 1-H' => $office_address,
+		'/policy/'                                       => $privacy_url,
+		'/privacy/'                                      => $personal_data_url,
+	);
+
+	foreach ( $socials as $social ) {
+		$name = strtolower( $social['name'] );
+
+		if ( false !== strpos( $name, 'telegram' ) ) {
+			$replacements['https://telegram.org/'] = $social['url'];
+		}
+
+		if ( false !== strpos( $name, 'whatsapp' ) ) {
+			$replacements['https://www.whatsapp.com/'] = $social['url'];
+		}
+	}
+
+	return strtr( $markup, $replacements );
+}
+
+/**
  * Render trusted source markup saved by the theme without wpautop changing it.
  */
 function arcticrc_render_seeded_post_content( $post_id = 0 ) {
@@ -288,5 +324,8 @@ function arcticrc_render_seeded_post_content( $post_id = 0 ) {
 		return;
 	}
 
-	echo do_shortcode( get_post_field( 'post_content', $post_id ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	$markup = get_post_field( 'post_content', $post_id );
+	$markup = arcticrc_apply_global_markup( $markup );
+
+	echo do_shortcode( $markup ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
