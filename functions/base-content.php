@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-6';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-7';
 
 
 /**
@@ -284,6 +284,7 @@ function arcticrc_seed_global_options() {
 		'field_arcticrc_site_kpp'           => '772101001',
 		'field_arcticrc_site_legal_address' => 'г. Москва, ул Михайлова, д 31А, кв 404',
 		'field_arcticrc_copyright'          => 'Все права защищены',
+		'field_arcticrc_yandex_maps_api_key'=> '6b4eac7a-0149-488d-b8c5-391ae43a22e4',
 	);
 
 	foreach ( $values as $field_key => $value ) {
