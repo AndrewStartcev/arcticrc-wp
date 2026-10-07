@@ -58,6 +58,30 @@ $identity_lines = array_filter(
 		</div>
 	</div>
 </footer>
+<?php
+$dialog_variant = 'consultation';
+$dialog_purpose = 'consultation';
+
+if ( is_page( 'equipment-rent' ) ) {
+	$dialog_variant = 'equipment';
+	$dialog_purpose = 'rent';
+} elseif ( is_page( 'equipment-sale' ) ) {
+	$dialog_variant = 'equipment';
+	$dialog_purpose = 'sale';
+}
+?>
+<dialog class="enquiry-dialog<?php echo 'equipment' === $dialog_variant ? ' enquiry-dialog--equipment' : ''; ?>" id="enquiry-dialog" aria-labelledby="modal-title">
+	<div class="enquiry-dialog__panel" data-dialog-panel>
+		<button class="enquiry-dialog__close" type="button" data-dialog-close aria-label="Закрыть форму">×</button>
+		<?php
+		echo arcticrc_cf7_form_html(
+			$dialog_variant,
+			$dialog_purpose,
+			'enquiry-form ' . ( 'equipment' === $dialog_variant ? 'enquiry-form--equipment' : 'enquiry-form--consultation' )
+		); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		?>
+	</div>
+</dialog>
 <div class="scroll-return" hidden>
 	<button class="action action--icon action--primary scroll-return__button" type="button" aria-label="Наверх к шапке" title="Наверх к шапке" aria-disabled="true">
 		<span class="scroll-return__arrow scroll-return__arrow--up" aria-hidden="true"></span>
