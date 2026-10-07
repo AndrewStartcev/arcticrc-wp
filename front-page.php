@@ -54,17 +54,8 @@ $socials = arcticrc_socials();
 		<section class="page__section page__section--services page__section--after-hero" id="services">
 			<div class="page-heading page-heading--section page-heading--services"><h2 class="page-heading__title"><?php echo esc_html( arcticrc_home_value( 'home_services_title', 'Наши услуги' ) ); ?></h2></div>
 			<div class="page__section-content"><div class="collection collection--services">
-				<?php foreach ( (array) $services as $index => $row ) :
-					$service = $row['service'] ?? null;
-					if ( is_numeric( $service ) ) { $service = get_post( (int) $service ); }
-					$title = $service instanceof WP_Post ? get_the_title( $service ) : 'Полевые испытания грунтов сваями';
-					$url = $service instanceof WP_Post ? get_permalink( $service ) : home_url( '/services/soil-testing/' );
-					$image = arcticrc_image_url( $row['image'] ?? '', 'media/web/18d059bc1b44b09a13800860e84b987e755b9dc4.webp' );
-				?>
-				<article class="service-card" id="service-<?php echo esc_attr( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?>">
-					<div class="service-card__body"><div class="service-card__heading"><h3 class="service-card__title"><?php echo esc_html( $title ); ?></h3><span class="service-card__number"><?php echo esc_html( $row['number'] ?? '/01' ); ?></span></div><div class="service-card__details"><ul class="service-card__bullets"><li>Геотехнический мониторинг</li><li>Инженерно-геологических изыскания</li><li>Инклинометрические измерения скважин</li><li>Оценка вибрационного воздействия</li></ul><a class="action action--primary action--card-link service-card__action" href="<?php echo esc_url( $url ); ?>"><span class="action__marker" aria-hidden="true"></span><span class="action__label">Подробнее</span></a></div></div>
-					<img class="service-card__image" src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy" decoding="async">
-				</article>
+				<?php foreach ( (array) $services as $index => $service ) : ?>
+					<?php arcticrc_render_service_card( $service, $index ); ?>
 				<?php endforeach; ?>
 			</div></div>
 		</section>
