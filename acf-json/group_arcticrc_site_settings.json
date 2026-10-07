@@ -252,7 +252,7 @@
             "key": "field_arcticrc_privacy_url",
             "label": "Политика конфиденциальности",
             "name": "site_privacy_url",
-            "type": "url",
+            "type": "text",
             "default_value": "/policy/",
             "placeholder": "/policy/",
             "wrapper": {
@@ -265,7 +265,7 @@
             "key": "field_arcticrc_personal_data_url",
             "label": "Согласие на обработку ПДн",
             "name": "site_personal_data_url",
-            "type": "url",
+            "type": "text",
             "default_value": "/privacy/",
             "placeholder": "/privacy/",
             "wrapper": {
