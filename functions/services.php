@@ -71,35 +71,6 @@ function arcticrc_render_service_card( $post, $index = 0 ) {
 	<?php
 }
 
-function arcticrc_seed_project( $slug, $title, $image_path ) {
-	$post = get_page_by_path( $slug, OBJECT, 'project' );
-
-	if ( ! $post ) {
-		$post_id = wp_insert_post(
-			array(
-				'post_type'   => 'project',
-				'post_status' => 'publish',
-				'post_title'  => $title,
-				'post_name'   => $slug,
-			)
-		);
-	} else {
-		$post_id = $post->ID;
-	}
-
-	if ( ! $post_id || is_wp_error( $post_id ) ) {
-		return 0;
-	}
-
-	$image_id = arcticrc_seed_media_asset( $image_path, $title );
-
-	if ( $image_id && ! has_post_thumbnail( $post_id ) ) {
-		set_post_thumbnail( $post_id, $image_id );
-	}
-
-	return (int) $post_id;
-}
-
 function arcticrc_seed_soil_testing_service() {
 	if ( ! is_admin() || ! current_user_can( 'manage_options' ) || ! function_exists( 'update_field' ) ) {
 		return;
@@ -290,22 +261,30 @@ function arcticrc_seed_soil_testing_service() {
 		);
 	}
 
-	$project_ids = array(
-		arcticrc_seed_project(
-			'soil-testing-mount-workplace',
-			'Испытания грунтов плоским штампом на объекте Mount — workplace, согласно ГОСТ 20276.1-2020.',
-			'media/web/c40ba464477e42825628a598601f7e2cc2acea29.webp'
-		),
-		arcticrc_seed_project(
-			'soil-bearing-capacity',
-			'Соответствие несущей способности грунтов расчетным нагрузкам на объекте',
-			'media/web/de3892be829af185db31152835844e0786424f66.webp'
-		),
-	);
-	$project_ids = array_values( array_filter( $project_ids ) );
+	if ( ! get_field( 'service_projects', $post_id ) ) {
+		$project_one_image = arcticrc_seed_media_asset(
+			'media/web/c40ba464477e42825628a598601f7e2cc2acea29.webp',
+			'Испытания грунтов плоским штампом'
+		);
+		$project_two_image = arcticrc_seed_media_asset(
+			'media/web/de3892be829af185db31152835844e0786424f66.webp',
+			'Соответствие несущей способности грунтов'
+		);
 
-	if ( $project_ids && ! get_field( 'service_projects', $post_id ) ) {
-		update_field( 'field_arcticrc_service_projects', $project_ids, $post_id );
+		update_field(
+			'field_arcticrc_service_projects',
+			array(
+				array(
+					'field_arcticrc_service_project_image' => $project_one_image,
+					'field_arcticrc_service_project_title' => 'Испытания грунтов плоским штампом на объекте Mount — workplace, согласно ГОСТ 20276.1-2020.',
+				),
+				array(
+					'field_arcticrc_service_project_image' => $project_two_image,
+					'field_arcticrc_service_project_title' => 'Соответствие несущей способности грунтов расчетным нагрузкам на объекте',
+				),
+			),
+			$post_id
+		);
 	}
 
 	update_post_meta( $post_id, '_arcticrc_service_seed_version', ARCTICRC_SERVICE_SEED_VERSION );
