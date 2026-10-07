@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_arcticrc_home_tab_hero",
-            "label": "Hero",
+            "label": "Главный экран",
             "name": "",
             "type": "tab",
             "placement": "left",
@@ -558,5 +558,5 @@
     "active": true,
     "description": "Контент главной страницы ArcticRC.",
     "show_in_rest": 0,
-    "modified": 1791393000
+    "modified": 1791393001
 }
