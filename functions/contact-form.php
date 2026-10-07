@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-3';
+const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-4';
 
 function arcticrc_cf7_is_available() {
 	return defined( 'WPCF7_VERSION' ) || post_type_exists( 'wpcf7_contact_form' );
@@ -47,7 +47,6 @@ function arcticrc_cf7_form_template( $variant = 'consultation' ) {
 	Я согласен с <a class="enquiry-form__link" href="%3$s">политикой конфиденциальности</a> и <a class="enquiry-form__link" href="%4$s">условиями соглашения на обработку персональных данных</a>
 	[/acceptance]
 </div>
-<p class="enquiry-form__consent-hint" aria-live="polite">Подтвердите согласие, чтобы отправить заявку.</p>
 <button class="action action--primary enquiry-form__submit" type="submit" disabled>
 	<span class="action__marker" aria-hidden="true"></span>
 	<span class="action__label">Оставить заявку</span>
