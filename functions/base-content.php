@@ -10,7 +10,49 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-3';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-4';
+
+
+/**
+ * Theme assets that must become real Media Library attachments.
+ *
+ * Add new approved artwork here. The seed process copies each file from
+ * /assets to /uploads, creates an attachment, and returns its attachment ID.
+ */
+function arcticrc_seed_asset_registry() {
+	return array(
+		'logo_light' => array(
+			'path'  => 'media/web/logo-99-4083.svg',
+			'title' => 'Логотип ArcticRC — светлый',
+		),
+		'logo_blue' => array(
+			'path'  => 'media/web/logo-99-1171.svg',
+			'title' => 'Логотип ArcticRC — синий',
+		),
+		'telegram' => array(
+			'path'  => 'media/web/social-telegram.svg',
+			'title' => 'Telegram',
+		),
+		'whatsapp' => array(
+			'path'  => 'media/web/social-whatsapp.svg',
+			'title' => 'WhatsApp',
+		),
+		'footer_logo' => array(
+			'path'  => 'media/web/logo-100-5500.svg',
+			'title' => 'Логотип ArcticRC — подвал',
+		),
+	);
+}
+
+function arcticrc_seed_registered_assets() {
+	$result = array();
+
+	foreach ( arcticrc_seed_asset_registry() as $key => $asset ) {
+		$result[ $key ] = arcticrc_seed_media_asset( $asset['path'], $asset['title'] );
+	}
+
+	return $result;
+}
 
 
 /**
@@ -235,10 +277,11 @@ function arcticrc_seed_global_options() {
 		return;
 	}
 
-	$logo_light_id = arcticrc_seed_media_asset( 'media/web/logo-99-4083.svg', 'Логотип ArcticRC — светлый' );
-	$logo_blue_id  = arcticrc_seed_media_asset( 'media/web/logo-99-1171.svg', 'Логотип ArcticRC — синий' );
-	$telegram_icon = arcticrc_seed_media_asset( 'media/web/social-telegram.svg', 'Telegram' );
-	$whatsapp_icon = arcticrc_seed_media_asset( 'media/web/social-whatsapp.svg', 'WhatsApp' );
+	$assets         = arcticrc_seed_registered_assets();
+	$logo_light_id  = isset( $assets['logo_light'] ) ? $assets['logo_light'] : 0;
+	$logo_blue_id   = isset( $assets['logo_blue'] ) ? $assets['logo_blue'] : 0;
+	$telegram_icon  = isset( $assets['telegram'] ) ? $assets['telegram'] : 0;
+	$whatsapp_icon  = isset( $assets['whatsapp'] ) ? $assets['whatsapp'] : 0;
 
 	$values = array(
 		'field_arcticrc_site_phone'         => '+7(916)-616-02-20',
