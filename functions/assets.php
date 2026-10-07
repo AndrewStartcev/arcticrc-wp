@@ -29,6 +29,7 @@ function arcticrc_enqueue_assets() {
 		'enquiry-dialog'    => 'assets/css/components/enquiry-dialog.css',
 		'enquiry-form'      => 'assets/css/components/enquiry-form.css',
 		'enquiry-section'   => 'assets/css/components/enquiry-section.css',
+		'error-page'        => 'assets/css/components/error-page.css',
 		'equipment-card'    => 'assets/css/components/equipment-card.css',
 		'media-hero'        => 'assets/css/components/media-hero.css',
 		'page-heading'      => 'assets/css/components/page-heading.css',
