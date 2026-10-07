@@ -103,55 +103,23 @@
         },
         {
             "key": "field_arcticrc_home_services",
-            "label": "Карточки услуг",
+            "label": "Услуги",
             "name": "home_services",
-            "type": "repeater",
-            "layout": "row",
-            "button_label": "Добавить карточку",
-            "sub_fields": [
-                {
-                    "key": "field_arcticrc_home_service_post",
-                    "label": "Услуга",
-                    "name": "service",
-                    "type": "post_object",
-                    "post_type": [
-                        "service"
-                    ],
-                    "return_format": "object",
-                    "allow_null": 1,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    }
-                },
-                {
-                    "key": "field_arcticrc_home_service_image",
-                    "label": "Картинка",
-                    "name": "image",
-                    "type": "image",
-                    "return_format": "array",
-                    "preview_size": "medium",
-                    "library": "all",
-                    "wrapper": {
-                        "width": "35",
-                        "class": "",
-                        "id": ""
-                    }
-                },
-                {
-                    "key": "field_arcticrc_home_service_number",
-                    "label": "Номер",
-                    "name": "number",
-                    "type": "text",
-                    "default_value": "/01",
-                    "wrapper": {
-                        "width": "15",
-                        "class": "",
-                        "id": ""
-                    }
-                }
-            ]
+            "type": "relationship",
+            "instructions": "Выберите услуги и задайте порядок перетаскиванием. Картинка берётся из обложки записи, номер формируется автоматически.",
+            "post_type": [
+                "service"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": 0,
+            "max": 0,
+            "return_format": "object"
         },
         {
             "key": "field_arcticrc_home_tab_geo",
@@ -590,5 +558,5 @@
     "active": true,
     "description": "Контент главной страницы ArcticRC.",
     "show_in_rest": 0,
-    "modified": 1791390000
+    "modified": 1791393000
 }
