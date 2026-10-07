@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-1';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-2';
 
 /**
  * Read the <main> block from a static source file and adapt paths to WordPress.
@@ -163,14 +163,16 @@ function arcticrc_seed_global_options() {
 	}
 
 	$values = array(
-		'field_arcticrc_site_phone'        => '+7(916)-616-02-20',
-		'field_arcticrc_site_email'        => 'engineering@arcticrc.ru',
-		'field_arcticrc_site_telegram_url' => 'https://telegram.org/',
-		'field_arcticrc_site_whatsapp_url' => 'https://www.whatsapp.com/',
-		'field_arcticrc_site_address'      => 'Москва, 2-й Кожевнический пер, д.1, помещ. 1-H',
-		'field_arcticrc_site_company_name' => 'ООО "ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ"',
-		'field_arcticrc_site_inn'          => '9721265458',
-		'field_arcticrc_site_kpp'          => '772101001',
+		'field_arcticrc_site_phone'         => '+7(916)-616-02-20',
+		'field_arcticrc_site_email'         => 'engineering@arcticrc.ru',
+		'field_arcticrc_site_address'       => 'Москва, 2-й Кожевнический пер, д.1, помещ. 1-H',
+		'field_arcticrc_site_company_name'  => 'ООО "ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ"',
+		'field_arcticrc_site_inn'           => '9721265458',
+		'field_arcticrc_site_kpp'           => '772101001',
+		'field_arcticrc_site_legal_address' => 'г. Москва, ул Михайлова, д 31А, кв 404',
+		'field_arcticrc_copyright'          => 'Все права защищены',
+		'field_arcticrc_privacy_url'        => '/policy/',
+		'field_arcticrc_personal_data_url'  => '/privacy/',
 	);
 
 	foreach ( $values as $field_key => $value ) {
@@ -179,6 +181,29 @@ function arcticrc_seed_global_options() {
 		if ( null === $current || '' === $current || false === $current ) {
 			update_field( $field_key, $value, 'option' );
 		}
+	}
+
+	$socials = get_field( 'field_arcticrc_site_socials', 'option' );
+
+	if ( empty( $socials ) || ! is_array( $socials ) ) {
+		update_field(
+			'field_arcticrc_site_socials',
+			array(
+				array(
+					'field_arcticrc_social_icon'      => '',
+					'field_arcticrc_social_name'      => 'Telegram',
+					'field_arcticrc_social_url'       => 'https://telegram.org/',
+					'field_arcticrc_social_link_text' => 'Telegram',
+				),
+				array(
+					'field_arcticrc_social_icon'      => '',
+					'field_arcticrc_social_name'      => 'WhatsApp',
+					'field_arcticrc_social_url'       => 'https://www.whatsapp.com/',
+					'field_arcticrc_social_link_text' => 'WhatsApp',
+				),
+			),
+			'option'
+		);
 	}
 }
 
