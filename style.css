@@ -1,0 +1,19 @@
+/*
+Theme Name: ArcticRC
+Theme URI: https://arcticrc.ru/
+Author: Андрей Старцев
+Author URI: https://starcev.agency/
+Description: Кастомная WordPress-тема ГК «Центр Арктических Изысканий». Интеграция готовой BEM-вёрстки без визуальных конструкторов.
+Version: 0.1.0
+Text Domain: arcticrc
+*/
+
+.admin-bar .site-header {
+  top: 32px;
+}
+
+@media (max-width: 782px) {
+  .admin-bar .site-header {
+    top: 46px;
+  }
+}
