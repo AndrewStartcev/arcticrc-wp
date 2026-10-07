@@ -9,10 +9,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-2';
+const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-3';
 
 function arcticrc_cf7_is_available() {
-	return class_exists( 'WPCF7_ContactForm' );
+	return defined( 'WPCF7_VERSION' ) || post_type_exists( 'wpcf7_contact_form' );
 }
 
 function arcticrc_cf7_form_template( $variant = 'consultation' ) {
@@ -70,7 +70,13 @@ function arcticrc_cf7_mail_properties( $variant = 'consultation' ) {
 		'subject'            => $subject,
 		'sender'             => '[_site_title] <wordpress@[_site_domain]>',
 		'recipient'          => $recipient,
-		'body'               => "Имя: [name]\nТелефон: [phone]\nТип заявки: [purpose]\nID записи: [record_id]\n\nСтраница: [_url]\nДата: [_date] [_time]",
+		'body'               => "Имя: [name]
+Телефон: [phone]
+Тип заявки: [purpose]
+ID записи: [record_id]
+
+Страница: [_url]
+Дата: [_date] [_time]",
 		'additional_headers' => '',
 		'attachments'        => '',
 		'use_html'           => false,
@@ -100,38 +106,37 @@ function arcticrc_cf7_seed_form( $variant, $title ) {
 
 	$id = arcticrc_cf7_find_managed_form( $variant );
 
-	if ( $id ) {
-		$form = WPCF7_ContactForm::get_instance( $id );
-	} elseif ( method_exists( 'WPCF7_ContactForm', 'get_template' ) ) {
-		$form = WPCF7_ContactForm::get_template();
+	if ( ! $id ) {
+		$id = wp_insert_post(
+			array(
+				'post_type'   => 'wpcf7_contact_form',
+				'post_status' => 'publish',
+				'post_title'  => $title,
+			)
+		);
 	} else {
+		wp_update_post(
+			array(
+				'ID'         => $id,
+				'post_title' => $title,
+			)
+		);
+	}
+
+	if ( ! $id || is_wp_error( $id ) ) {
 		return 0;
 	}
 
-	if ( ! $form ) {
-		return 0;
-	}
+	update_post_meta( $id, '_form', arcticrc_cf7_form_template( $variant ) );
+	update_post_meta( $id, '_mail', arcticrc_cf7_mail_properties( $variant ) );
+	update_post_meta( $id, '_mail_2', array( 'active' => false ) );
+	update_post_meta( $id, '_messages', array() );
+	update_post_meta( $id, '_additional_settings', '' );
+	update_post_meta( $id, '_locale', get_locale() );
+	update_post_meta( $id, '_arcticrc_cf7_variant', $variant );
+	update_post_meta( $id, '_arcticrc_cf7_seed_version', ARCTICRC_CF7_SEED_VERSION );
 
-	$form->set_title( $title );
-
-	$properties         = $form->get_properties();
-	$properties['form'] = arcticrc_cf7_form_template( $variant );
-	$properties['mail'] = array_merge(
-		isset( $properties['mail'] ) && is_array( $properties['mail'] ) ? $properties['mail'] : array(),
-		arcticrc_cf7_mail_properties( $variant )
-	);
-
-	$form->set_properties( $properties );
-	$form->save();
-
-	$id = (int) $form->id();
-
-	if ( $id ) {
-		update_post_meta( $id, '_arcticrc_cf7_variant', $variant );
-		update_post_meta( $id, '_arcticrc_cf7_seed_version', ARCTICRC_CF7_SEED_VERSION );
-	}
-
-	return $id;
+	return (int) $id;
 }
 
 function arcticrc_cf7_seed_forms() {
@@ -158,30 +163,19 @@ add_action( 'admin_init', 'arcticrc_cf7_seed_forms', 40 );
 
 function arcticrc_cf7_form_html( $variant = 'consultation', $purpose = 'consultation', $classes = '' ) {
 	if ( ! arcticrc_cf7_is_available() ) {
-		if ( current_user_can( 'manage_options' ) ) {
-			return '<p class="enquiry-form__notice">Для отправки формы активируйте Contact Form 7.</p>';
-		}
-
-		return '';
+		return current_user_can( 'manage_options' )
+			? '<p class="enquiry-form__notice">Для работы формы активируйте Contact Form 7.</p>'
+			: '';
 	}
 
 	$id = arcticrc_cf7_find_managed_form( $variant );
 
 	if ( ! $id ) {
-		$id = arcticrc_cf7_seed_form(
-			$variant,
-			'equipment' === $variant ? 'ArcticRC — Оборудование' : 'ArcticRC — Бесплатная консультация'
-		);
-	}
-
-	if ( ! $id ) {
 		return '';
 	}
 
-	$classes = trim( $classes );
-	$classes = $classes ? $classes : 'enquiry-form enquiry-form--consultation';
-
-	$html = do_shortcode(
+	$classes = trim( $classes ) ?: 'enquiry-form enquiry-form--consultation';
+	$html    = do_shortcode(
 		sprintf(
 			'[contact-form-7 id="%d" html_class="%s"]',
 			$id,
@@ -189,7 +183,7 @@ function arcticrc_cf7_form_html( $variant = 'consultation', $purpose = 'consulta
 		)
 	);
 
-	$html = preg_replace(
+	return preg_replace(
 		'/<form\b/',
 		sprintf(
 			'<form data-enquiry-form data-purpose="%s"',
@@ -198,8 +192,6 @@ function arcticrc_cf7_form_html( $variant = 'consultation', $purpose = 'consulta
 		$html,
 		1
 	);
-
-	return $html;
 }
 
 function arcticrc_cf7_replace_source_forms( $markup ) {
@@ -219,12 +211,13 @@ function arcticrc_cf7_replace_source_forms( $markup ) {
 				$purpose = sanitize_key( $purpose_match[1] );
 			}
 
-			return arcticrc_cf7_form_html( $variant, $purpose, $classes );
+			$form = arcticrc_cf7_form_html( $variant, $purpose, $classes );
+
+			return $form ?: $match[0];
 		},
 		$markup
 	);
 }
-
 
 function arcticrc_cf7_admin_notice() {
 	if ( arcticrc_cf7_is_available() || ! current_user_can( 'activate_plugins' ) ) {
