@@ -247,7 +247,7 @@ function arcticrc_hide_managed_page_editor() {
 
 	$template = get_page_template_slug( $post_id );
 
-	if ( 'page-services.php' === $template ) {
+	if ( in_array( $template, array( 'page-services.php', 'page-contacts.php' ), true ) ) {
 		remove_post_type_support( 'page', 'editor' );
 	}
 }
