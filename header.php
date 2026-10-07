@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 $phone         = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
 $telegram_url  = arcticrc_option( 'site_telegram_url', 'https://telegram.org/' );
 $whatsapp_url  = arcticrc_option( 'site_whatsapp_url', 'https://www.whatsapp.com/' );
-$is_overlay    = is_front_page();
-$logo          = $is_overlay ? 'media/web/logo-99-4083.svg' : 'media/web/logo-99-1171.svg';
+$is_overlay    = arcticrc_header_is_media();
+$logo          = arcticrc_header_logo();
 $primary_items = arcticrc_menu_items( 'primary' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
