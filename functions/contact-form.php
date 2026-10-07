@@ -217,3 +217,13 @@ function arcticrc_cf7_replace_source_forms( $markup ) {
 		$markup
 	);
 }
+
+
+function arcticrc_cf7_admin_notice() {
+	if ( arcticrc_cf7_is_available() || ! current_user_can( 'activate_plugins' ) ) {
+		return;
+	}
+
+	echo '<div class="notice notice-warning"><p><strong>ArcticRC:</strong> для работы форм необходимо установить и активировать Contact Form 7.</p></div>';
+}
+add_action( 'admin_notices', 'arcticrc_cf7_admin_notice' );
