@@ -87,5 +87,29 @@ function arcticrc_enqueue_assets() {
 
 		wp_script_add_data( $full_handle, 'strategy', 'defer' );
 	}
+
+	if ( is_front_page() && function_exists( 'arcticrc_home_geography_is_map' ) && arcticrc_home_geography_is_map() ) {
+		$api_key = arcticrc_option( 'yandex_maps_api_key', '' );
+
+		if ( $api_key ) {
+			wp_enqueue_script(
+				'arcticrc-yandex-maps-api',
+				'https://api-maps.yandex.ru/2.1/?apikey=' . rawurlencode( $api_key ) . '&lang=ru_RU',
+				array(),
+				null,
+				true
+			);
+
+			wp_enqueue_script(
+				'arcticrc-yandex-map',
+				$uri . '/assets/js/components/yandex-map.js',
+				array( 'arcticrc-yandex-maps-api' ),
+				arcticrc_asset_version( 'assets/js/components/yandex-map.js' ),
+				true
+			);
+
+			wp_script_add_data( 'arcticrc-yandex-map', 'strategy', 'defer' );
+		}
+	}
 }
 add_action( 'wp_enqueue_scripts', 'arcticrc_enqueue_assets' );
