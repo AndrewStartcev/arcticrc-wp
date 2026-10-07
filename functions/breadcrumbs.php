@@ -42,28 +42,6 @@ function arcticrc_breadcrumb_items() {
 		return $items;
 	}
 
-	if ( is_singular( 'equipment' ) ) {
-		$items[] = array(
-			'label' => 'Оборудование',
-			'url'   => get_post_type_archive_link( 'equipment' ),
-		);
-
-		$items[] = array(
-			'label' => get_the_title(),
-			'url'   => '',
-		);
-
-		return $items;
-	}
-
-	if ( is_post_type_archive( 'equipment' ) ) {
-		$items[] = array(
-			'label' => 'Оборудование',
-			'url'   => '',
-		);
-
-		return $items;
-	}
 
 	if ( is_singular( 'project' ) ) {
 		$items[] = array(
