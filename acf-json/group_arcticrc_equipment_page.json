@@ -1,0 +1,208 @@
+{
+    "key": "group_arcticrc_equipment_page",
+    "title": "Страница оборудования",
+    "fields": [
+        {
+            "key": "field_arcticrc_equipment_page_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_equipment_page_title",
+            "label": "H1",
+            "name": "equipment_page_title",
+            "type": "text"
+        },
+        {
+            "key": "field_arcticrc_equipment_page_description",
+            "label": "Описание",
+            "name": "equipment_page_description",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_arcticrc_equipment_page_hero_desktop",
+            "label": "Hero desktop",
+            "name": "equipment_page_hero_desktop",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_hero_mobile",
+            "label": "Hero mobile",
+            "name": "equipment_page_hero_mobile",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_primary_text",
+            "label": "Текст основной кнопки",
+            "name": "equipment_page_primary_text",
+            "type": "text",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_catalog",
+            "label": "Каталог",
+            "name": "equipment_page_catalog",
+            "type": "file",
+            "return_format": "array",
+            "library": "all",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_tab_items",
+            "label": "Оборудование",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_equipment_page_items_visible",
+            "label": "Показывать блок",
+            "name": "equipment_page_items_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_equipment_page_items_title",
+            "label": "Заголовок",
+            "name": "equipment_page_items_title",
+            "type": "text",
+            "default_value": "Техника и оборудование"
+        },
+        {
+            "key": "field_arcticrc_equipment_page_items",
+            "label": "Оборудование",
+            "name": "equipment_page_items",
+            "type": "relationship",
+            "instructions": "Выберите записи equipment и порядок. Название, обложка и подписи берутся из самой записи.",
+            "post_type": [
+                "equipment"
+            ],
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "return_format": "object"
+        },
+        {
+            "key": "field_arcticrc_equipment_page_cta_title",
+            "label": "CTA — заголовок",
+            "name": "equipment_page_cta_title",
+            "type": "text",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_cta_text",
+            "label": "CTA — текст",
+            "name": "equipment_page_cta_text",
+            "type": "textarea",
+            "rows": 2,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_tab_contact",
+            "label": "Контакты",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_equipment_page_contact_visible",
+            "label": "Показывать блок",
+            "name": "equipment_page_contact_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_equipment_page_contact_title",
+            "label": "Заголовок",
+            "name": "equipment_page_contact_title",
+            "type": "text",
+            "default_value": "Начнем с разговора — доведем до результата",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_equipment_page_contact_intro",
+            "label": "Описание",
+            "name": "equipment_page_contact_intro",
+            "type": "textarea",
+            "rows": 3,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-equipment.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Настройки страниц аренды и продажи оборудования.",
+    "show_in_rest": 0,
+    "modified": 1791397001
+}
