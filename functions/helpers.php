@@ -32,3 +32,35 @@ function arcticrc_menu_items( $location ) {
 
 	return is_array( $items ) ? $items : array();
 }
+
+/**
+ * Header visual mode.
+ *
+ * Media mode is used when the header sits on top of a hero image.
+ * Keep this decision in one place instead of duplicating it in templates.
+ */
+function arcticrc_header_mode() {
+	if ( is_front_page() ) {
+		return 'media';
+	}
+
+	if ( is_page( array( 'equipment-rent', 'equipment-sale' ) ) ) {
+		return 'media';
+	}
+
+	if ( is_post_type_archive( 'equipment' ) ) {
+		return 'media';
+	}
+
+	return 'light';
+}
+
+function arcticrc_header_is_media() {
+	return 'media' === arcticrc_header_mode();
+}
+
+function arcticrc_header_logo() {
+	return arcticrc_header_is_media()
+		? 'media/web/logo-99-4083.svg'
+		: 'media/web/logo-99-1171.svg';
+}
