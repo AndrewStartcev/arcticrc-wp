@@ -1,0 +1,52 @@
+{
+    "key": "group_arcticrc_equipment_item",
+    "title": "Оборудование",
+    "fields": [
+        {
+            "key": "field_arcticrc_equipment_tab_card",
+            "label": "Карточка",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_equipment_tags",
+            "label": "Модели / подписи",
+            "name": "equipment_tags",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Добавить",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_equipment_tag_text",
+                    "label": "Текст",
+                    "name": "text",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "equipment"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt"
+    ],
+    "active": true,
+    "description": "Данные карточки оборудования.",
+    "show_in_rest": 0,
+    "modified": 1791397000
+}
