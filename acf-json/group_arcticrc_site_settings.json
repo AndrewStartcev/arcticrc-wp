@@ -1,0 +1,118 @@
+{
+    "key": "group_arcticrc_site_settings",
+    "title": "Глобальные настройки сайта",
+    "fields": [
+        {
+            "key": "field_arcticrc_tab_contacts",
+            "label": "Контакты",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_site_phone",
+            "label": "Телефон",
+            "name": "site_phone",
+            "type": "text",
+            "default_value": "+7(916)-616-02-20",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_arcticrc_site_email",
+            "label": "E-mail",
+            "name": "site_email",
+            "type": "email",
+            "default_value": "engineering@arcticrc.ru",
+            "placeholder": ""
+        },
+        {
+            "key": "field_arcticrc_site_telegram_url",
+            "label": "Telegram",
+            "name": "site_telegram_url",
+            "type": "url",
+            "default_value": "https://telegram.org/",
+            "placeholder": "https://t.me/..."
+        },
+        {
+            "key": "field_arcticrc_site_whatsapp_url",
+            "label": "WhatsApp",
+            "name": "site_whatsapp_url",
+            "type": "url",
+            "default_value": "https://www.whatsapp.com/",
+            "placeholder": "https://wa.me/..."
+        },
+        {
+            "key": "field_arcticrc_site_address",
+            "label": "Адрес центрального офиса",
+            "name": "site_address",
+            "type": "textarea",
+            "default_value": "Москва, 2-й Кожевнический пер, д.1, помещ. 1-H",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_arcticrc_tab_company",
+            "label": "Реквизиты",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_site_company_name",
+            "label": "Юридическое лицо",
+            "name": "site_company_name",
+            "type": "text",
+            "default_value": "ООО \"ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ\"",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_arcticrc_site_inn",
+            "label": "ИНН",
+            "name": "site_inn",
+            "type": "text",
+            "default_value": "9721265458",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_arcticrc_site_kpp",
+            "label": "КПП",
+            "name": "site_kpp",
+            "type": "text",
+            "default_value": "772101001",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "arcticrc-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Общие данные сайта, используемые в шапке, подвале и контактных блоках.",
+    "show_in_rest": 0,
+    "modified": 1791378000
+}
