@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-1';
+const ARCTICRC_CF7_SEED_VERSION = '2026-10-07-2';
 
 function arcticrc_cf7_is_available() {
 	return class_exists( 'WPCF7_ContactForm' );
@@ -98,8 +98,15 @@ function arcticrc_cf7_seed_form( $variant, $title ) {
 		return 0;
 	}
 
-	$id   = arcticrc_cf7_find_managed_form( $variant );
-	$form = $id ? WPCF7_ContactForm::get_instance( $id ) : new WPCF7_ContactForm();
+	$id = arcticrc_cf7_find_managed_form( $variant );
+
+	if ( $id ) {
+		$form = WPCF7_ContactForm::get_instance( $id );
+	} elseif ( method_exists( 'WPCF7_ContactForm', 'get_template' ) ) {
+		$form = WPCF7_ContactForm::get_template();
+	} else {
+		return 0;
+	}
 
 	if ( ! $form ) {
 		return 0;
