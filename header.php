@@ -43,12 +43,12 @@ $primary_items = arcticrc_menu_items( 'primary' );
 			<div class="site-nav__actions">
 				<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--compact action--navigation site-nav__project-action" data-dialog-open data-purpose="consultation" data-record-id="" href="#request"><span class="action__label">Обсудить проект</span></a>
 				<?php foreach ( $socials as $social ) : ?>
-					<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--icon action--social action--navigation-icon" href="<?php echo esc_url( $social['url'] ); ?>" aria-label="<?php echo esc_attr( $social['name'] ?: $social['link_text'] ); ?>">
+					<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--icon action--social action--navigation-icon" href="<?php echo esc_url( $social['url'] ); ?>" aria-label="<?php echo esc_attr( $social['name'] ); ?>">
 						<span class="action__label">
 							<?php if ( $social['icon'] ) : ?>
 								<img class="action__image" src="<?php echo esc_url( $social['icon'] ); ?>" alt="">
 							<?php else : ?>
-								<span class="screen-reader-text"><?php echo esc_html( $social['link_text'] ); ?></span>
+								<span class="screen-reader-text"><?php echo esc_html( $social['name'] ); ?></span>
 							<?php endif; ?>
 						</span>
 					</a>
