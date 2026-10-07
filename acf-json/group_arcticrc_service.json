@@ -1,0 +1,442 @@
+{
+    "key": "group_arcticrc_service",
+    "title": "Услуга",
+    "fields": [
+        {
+            "key": "field_arcticrc_service_tab_card",
+            "label": "Карточка",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_card_bullets",
+            "label": "Краткий список",
+            "name": "service_card_bullets",
+            "type": "repeater",
+            "instructions": "Используется в карточке услуги на Главной и в архиве услуг.",
+            "layout": "table",
+            "button_label": "Добавить пункт",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_card_bullet",
+                    "label": "Текст",
+                    "name": "text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_arcticrc_service_tab_intro",
+            "label": "Первый экран",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_lead",
+            "label": "Описание под H1",
+            "name": "service_lead",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_arcticrc_service_tests",
+            "label": "Виды испытаний",
+            "name": "service_tests",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Добавить испытание",
+            "collapsed": "field_arcticrc_service_test_title",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_test_title",
+                    "label": "Название",
+                    "name": "title",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_test_image",
+                    "label": "Изображение",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_arcticrc_service_test_cta_title",
+            "label": "CTA — заголовок",
+            "name": "service_test_cta_title",
+            "type": "text",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_service_test_cta_text",
+            "label": "CTA — текст",
+            "name": "service_test_cta_text",
+            "type": "textarea",
+            "rows": 2,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_service_scenery_desktop",
+            "label": "Фон desktop",
+            "name": "service_scenery_desktop",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_service_scenery_mobile",
+            "label": "Фон mobile",
+            "name": "service_scenery_mobile",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_service_tab_prices",
+            "label": "Стоимость",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_prices_visible",
+            "label": "Показывать блок",
+            "name": "service_prices_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_service_prices_title",
+            "label": "Заголовок",
+            "name": "service_prices_title",
+            "type": "text",
+            "default_value": "Стоимость услуг"
+        },
+        {
+            "key": "field_arcticrc_service_price_groups",
+            "label": "Группы цен",
+            "name": "service_price_groups",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Добавить группу",
+            "collapsed": "field_arcticrc_service_price_group_title",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_price_group_title",
+                    "label": "Название группы",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_arcticrc_service_price_rows",
+                    "label": "Цены",
+                    "name": "rows",
+                    "type": "repeater",
+                    "layout": "table",
+                    "button_label": "Добавить строку",
+                    "sub_fields": [
+                        {
+                            "key": "field_arcticrc_service_price_title",
+                            "label": "Название",
+                            "name": "title",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_arcticrc_service_price_detail",
+                            "label": "Уточнение",
+                            "name": "detail",
+                            "type": "text"
+                        },
+                        {
+                            "key": "field_arcticrc_service_price_value",
+                            "label": "Цена",
+                            "name": "price",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_arcticrc_service_tab_company",
+            "label": "Преимущества",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_company_visible",
+            "label": "Показывать блок",
+            "name": "service_company_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_service_company_title",
+            "label": "Заголовок",
+            "name": "service_company_title",
+            "type": "text",
+            "default_value": "Не обещания, а система, которая работает"
+        },
+        {
+            "key": "field_arcticrc_service_company_features",
+            "label": "Большие карточки",
+            "name": "service_company_features",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Добавить карточку",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_company_feature_stat",
+                    "label": "Крупное значение",
+                    "name": "stat",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_company_feature_title",
+                    "label": "Заголовок",
+                    "name": "title",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_company_feature_body",
+                    "label": "Текст",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 3,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_company_feature_desktop",
+                    "label": "Картинка desktop",
+                    "name": "desktop_image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_company_feature_mobile",
+                    "label": "Картинка mobile",
+                    "name": "mobile_image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_arcticrc_service_company_credentials",
+            "label": "Дополнительные преимущества",
+            "name": "service_company_credentials",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Добавить преимущество",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_company_credential_title",
+                    "label": "Заголовок",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_arcticrc_service_company_credential_body",
+                    "label": "Текст",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 2
+                },
+                {
+                    "key": "field_arcticrc_service_company_credential_size",
+                    "label": "Размер",
+                    "name": "size",
+                    "type": "select",
+                    "choices": {
+                        "compact": "Компактный",
+                        "narrow": "Узкий",
+                        "medium": "Средний",
+                        "full": "На всю ширину"
+                    },
+                    "default_value": "compact",
+                    "return_format": "value"
+                }
+            ]
+        },
+        {
+            "key": "field_arcticrc_service_tab_projects",
+            "label": "Проекты",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_projects_visible",
+            "label": "Показывать блок",
+            "name": "service_projects_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_service_projects_title",
+            "label": "Заголовок",
+            "name": "service_projects_title",
+            "type": "text",
+            "default_value": "Проекты"
+        },
+        {
+            "key": "field_arcticrc_service_projects",
+            "label": "Связанные проекты",
+            "name": "service_projects",
+            "type": "relationship",
+            "post_type": [
+                "project"
+            ],
+            "filters": [
+                "search"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "return_format": "object"
+        },
+        {
+            "key": "field_arcticrc_service_tab_contact",
+            "label": "Контакты",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_service_contact_visible",
+            "label": "Показывать блок",
+            "name": "service_contact_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_service_contact_title",
+            "label": "Заголовок",
+            "name": "service_contact_title",
+            "type": "text",
+            "default_value": "Начнем с разговора — доведем до результата",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_service_contact_intro",
+            "label": "Описание",
+            "name": "service_contact_intro",
+            "type": "textarea",
+            "rows": 3,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "service"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt"
+    ],
+    "active": true,
+    "description": "Поля услуги ArcticRC.",
+    "show_in_rest": 0,
+    "modified": 1791394000
+}
