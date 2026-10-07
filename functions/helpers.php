@@ -64,3 +64,15 @@ function arcticrc_header_logo() {
 		? 'media/web/logo-99-4083.svg'
 		: 'media/web/logo-99-1171.svg';
 }
+
+function arcticrc_overlay_page_class() {
+	if ( is_front_page() ) {
+		return 'page page--home page--overlay';
+	}
+
+	if ( is_page( array( 'equipment-rent', 'equipment-sale' ) ) || is_post_type_archive( 'equipment' ) ) {
+		return 'page page--equipment page--overlay';
+	}
+
+	return 'page page--overlay';
+}
