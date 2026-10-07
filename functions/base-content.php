@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-10';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-11';
 
 
 /**
