@@ -19,6 +19,9 @@ $identity_lines = array_filter(
 	)
 );
 ?>
+<?php if ( arcticrc_header_is_media() ) : ?>
+</div>
+<?php endif; ?>
 <footer class="site-footer">
 	<picture>
 		<source media="(max-width: 740px)" srcset="<?php echo esc_url( arcticrc_asset_url( 'media/web/footer-background-mobile.webp' ) ); ?>">
