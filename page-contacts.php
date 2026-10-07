@@ -98,6 +98,7 @@ while ( have_posts() ) :
 							data-center-lat="<?php echo esc_attr( get_field( 'contacts_map_lat', $page_id ) ?: '55.7207' ); ?>"
 							data-center-lng="<?php echo esc_attr( get_field( 'contacts_map_lng', $page_id ) ?: '37.6476' ); ?>"
 							data-zoom="<?php echo esc_attr( (string) ( get_field( 'contacts_map_zoom', $page_id ) ?: 16 ) ); ?>"
+							data-address="<?php echo esc_attr( $address ); ?>"
 						>
 							<script type="application/json" data-map-points><?php echo wp_json_encode(
 								array(
