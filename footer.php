@@ -1,21 +1,24 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$phone            = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
-$email            = arcticrc_option( 'site_email', 'engineering@arcticrc.ru' );
-$address          = arcticrc_option( 'site_address', 'Москва, 2-й Кожевнический пер, д.1, помещ. 1-H' );
-$company          = arcticrc_option( 'site_company_name', 'ООО "ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ"' );
-$inn              = arcticrc_option( 'site_inn', '9721265458' );
-$kpp              = arcticrc_option( 'site_kpp', '772101001' );
-$navigation_items = arcticrc_menu_items( 'footer_navigation' );
-$direction_items  = arcticrc_menu_items( 'footer_directions' );
+$phone             = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
+$email             = arcticrc_option( 'site_email', 'engineering@arcticrc.ru' );
+$legal_address     = arcticrc_option( 'site_legal_address', 'г. Москва, ул Михайлова, д 31А, кв 404' );
+$company           = arcticrc_option( 'site_company_name', 'ООО "ГК ЦЕНТР АРКТИЧЕСКИХ ИЗЫСКАНИЙ"' );
+$inn               = arcticrc_option( 'site_inn', '9721265458' );
+$kpp               = arcticrc_option( 'site_kpp', '772101001' );
+$copyright         = arcticrc_option( 'site_copyright', 'Все права защищены' );
+$privacy_url       = arcticrc_option( 'site_privacy_url', home_url( '/policy/' ) );
+$personal_data_url = arcticrc_option( 'site_personal_data_url', home_url( '/privacy/' ) );
+$navigation_items  = arcticrc_menu_items( 'footer_navigation' );
+$direction_items   = arcticrc_menu_items( 'footer_directions' );
 
 $identity_lines = array_filter(
 	array(
 		$company,
 		$inn ? 'ИНН ' . $inn : '',
 		$kpp ? 'КПП ' . $kpp : '',
-		$address,
+		$legal_address,
 	)
 );
 ?>
@@ -49,9 +52,9 @@ $identity_lines = array_filter(
 			<?php endforeach; ?>
 		</nav>
 		<div class="site-footer__legal">
-			<a class="site-footer__legal-link" href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Соглашение на обработку персональных данных</a>
-			<a class="site-footer__legal-link" href="<?php echo esc_url( home_url( '/policy/' ) ); ?>">Политика конфиденциальности</a>
-			<span>© <?php echo esc_html( wp_date( 'Y' ) ); ?> Все права защищены</span>
+			<a class="site-footer__legal-link" href="<?php echo esc_url( $personal_data_url ); ?>">Соглашение на обработку персональных данных</a>
+			<a class="site-footer__legal-link" href="<?php echo esc_url( $privacy_url ); ?>">Политика конфиденциальности</a>
+			<span>© <?php echo esc_html( wp_date( 'Y' ) . ' ' . $copyright ); ?></span>
 		</div>
 	</div>
 </footer>
