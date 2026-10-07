@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_HOME_SEED_VERSION = '2026-10-07-1';
+const ARCTICRC_HOME_SEED_VERSION = '2026-10-07-2';
 
 function arcticrc_home_page_id() {
 	$page_id = (int) get_option( 'page_on_front' );
@@ -69,16 +69,21 @@ function arcticrc_seed_home_content() {
 	);
 
 	$defaults = array(
+		'field_arcticrc_home_services_visible' => 1,
 		'field_arcticrc_home_services_title' => 'Наши услуги',
+		'field_arcticrc_home_geo_visible'    => 1,
 		'field_arcticrc_home_geo_title'      => 'Наша география — от Мурманска до Владивостока',
 		'field_arcticrc_home_geo_lead'       => 'Оказываем услуги по всей территории России, в том числе в условиях крайнего Севера.',
 		'field_arcticrc_home_geo_mode'       => 'map',
 		'field_arcticrc_home_geo_lat'        => '61.5240',
 		'field_arcticrc_home_geo_lng'        => '105.3188',
 		'field_arcticrc_home_geo_zoom'       => 3,
+		'field_arcticrc_home_clients_visible'=> 1,
 		'field_arcticrc_home_clients_title'  => 'Наши заказчики — ориентир в надёжности',
+		'field_arcticrc_home_docs_visible'   => 1,
 		'field_arcticrc_home_docs_title'     => 'Документация компании',
 		'field_arcticrc_home_docs_lead'      => 'Вся работа подтверждена СРО, лицензиями и сертификатами — это гарантия качества, безопасности и ответственности на каждом этапе.',
+		'field_arcticrc_home_contact_visible'=> 1,
 		'field_arcticrc_home_contact_title'  => 'Начнем с разговора — доведем до результата',
 		'field_arcticrc_home_contact_intro'  => 'Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис! Мы ответим на ваши вопросы',
 	);
@@ -163,5 +168,19 @@ function arcticrc_seed_home_content() {
 add_action( 'admin_init', 'arcticrc_seed_home_content', 35 );
 
 function arcticrc_home_geography_is_map() {
-	return 'map' === arcticrc_home_value( 'home_geography_mode', 'map' );
+	return arcticrc_home_block_visible( 'home_geography_visible' )
+		&& 'map' === arcticrc_home_value( 'home_geography_mode', 'map' );
+}
+
+
+function arcticrc_home_block_visible( $field_name ) {
+	$page_id = arcticrc_home_page_id();
+
+	if ( ! $page_id || ! function_exists( 'get_field' ) ) {
+		return true;
+	}
+
+	$value = get_field( $field_name, $page_id );
+
+	return false !== $value && '0' !== (string) $value;
 }
