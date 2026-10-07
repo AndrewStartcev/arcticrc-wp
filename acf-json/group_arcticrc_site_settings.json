@@ -53,7 +53,8 @@
                 "width": "50",
                 "class": "",
                 "id": ""
-            }
+            },
+            "instructions": "Год подставляется автоматически. Укажите только текст после года, например: «Все права защищены»."
         },
         {
             "key": "field_arcticrc_tab_contacts",
@@ -136,7 +137,7 @@
                     "library": "all",
                     "mime_types": "svg,png,webp",
                     "wrapper": {
-                        "width": "15",
+                        "width": "20",
                         "class": "",
                         "id": ""
                     }
@@ -148,7 +149,7 @@
                     "type": "text",
                     "placeholder": "Telegram",
                     "wrapper": {
-                        "width": "20",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     }
@@ -160,19 +161,7 @@
                     "type": "url",
                     "placeholder": "https://...",
                     "wrapper": {
-                        "width": "40",
-                        "class": "",
-                        "id": ""
-                    }
-                },
-                {
-                    "key": "field_arcticrc_social_link_text",
-                    "label": "Текст ссылки",
-                    "name": "link_text",
-                    "type": "text",
-                    "placeholder": "Telegram",
-                    "wrapper": {
-                        "width": "25",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     }
@@ -252,27 +241,37 @@
             "key": "field_arcticrc_privacy_url",
             "label": "Политика конфиденциальности",
             "name": "site_privacy_url",
-            "type": "text",
-            "default_value": "/policy/",
-            "placeholder": "/policy/",
+            "type": "page_link",
             "wrapper": {
                 "width": "50",
                 "class": "",
                 "id": ""
-            }
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
         },
         {
             "key": "field_arcticrc_personal_data_url",
             "label": "Согласие на обработку ПДн",
             "name": "site_personal_data_url",
-            "type": "text",
-            "default_value": "/privacy/",
-            "placeholder": "/privacy/",
+            "type": "page_link",
             "wrapper": {
                 "width": "50",
                 "class": "",
                 "id": ""
-            }
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "allow_null": 1,
+            "allow_archives": 0,
+            "multiple": 0
         }
     ],
     "location": [
@@ -293,5 +292,5 @@
     "active": true,
     "description": "Общие данные сайта. Всё, что повторяется в нескольких шаблонах, хранится здесь.",
     "show_in_rest": 0,
-    "modified": 1791381720
+    "modified": 1791384000
 }
