@@ -246,23 +246,20 @@ function arcticrc_seed_menu( $name, $location, $items ) {
 	}
 
 	$current = wp_get_nav_menu_items( $menu_id );
-	if ( $current ) {
-		foreach ( $current as $item ) {
-			wp_delete_post( $item->ID, true );
-		}
-	}
 
-	foreach ( $items as $item ) {
-		wp_update_nav_menu_item(
-			$menu_id,
-			0,
-			array(
-				'menu-item-title'  => $item['title'],
-				'menu-item-url'    => home_url( $item['url'] ),
-				'menu-item-status' => 'publish',
-				'menu-item-type'   => 'custom',
-			)
-		);
+	if ( ! $current ) {
+		foreach ( $items as $item ) {
+			wp_update_nav_menu_item(
+				$menu_id,
+				0,
+				array(
+					'menu-item-title'  => $item['title'],
+					'menu-item-url'    => home_url( $item['url'] ),
+					'menu-item-status' => 'publish',
+					'menu-item-type'   => 'custom',
+				)
+			);
+		}
 	}
 
 	$locations              = get_theme_mod( 'nav_menu_locations', array() );
