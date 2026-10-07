@@ -25,3 +25,15 @@
 .enquiry-form--equipment { --enquiry-form-padding: 60px 45px 64px; --enquiry-form-title-size: 35px; --enquiry-form-title-line-height: 1.26; --enquiry-form-fields-margin-top: 50px; }
 @media (max-width: 740px) { .enquiry-form { --enquiry-form-padding: 30px 20px; } .enquiry-form__title { font-size: var(--enquiry-form-title-size, 20px); } .enquiry-form__intro { margin-top: 16px; margin-bottom: 32px; max-width: 265px; line-height: 1.45; } .enquiry-form__fields { gap: var(--enquiry-form-fields-gap, 5px); } .enquiry-form__consent { margin-top: 20px; } }
 @media (max-width: 600px) { .enquiry-form--equipment { --enquiry-form-padding: 28px 25px 36px; --enquiry-form-title-size: 22px; --enquiry-form-title-line-height: 1.04; --enquiry-form-title-max-width: 300px; --enquiry-form-fields-margin-top: 40px; --enquiry-form-fields-gap: 10px; } }
+
+/* Contact Form 7 keeps its runtime wrapper, but it must not change the approved grid geometry. */
+.enquiry-section > .wpcf7,
+.enquiry-dialog__panel > .wpcf7 { display: contents; }
+.enquiry-form .wpcf7-form-control-wrap { display: block; }
+.enquiry-form__consent > .wpcf7-form-control-wrap { display: contents; }
+.enquiry-form__consent .wpcf7-acceptance,
+.enquiry-form__consent .wpcf7-list-item,
+.enquiry-form__consent .wpcf7-list-item > label { display: contents; margin: 0; }
+.enquiry-form .wpcf7-not-valid-tip { margin-top: 6px; color: #a33d31; font-size: 12px; line-height: 1.3; }
+.enquiry-form .wpcf7-response-output { margin: 12px 0 0; padding: 0; border: 0; font-size: 12px; line-height: 1.3; }
+.enquiry-form.submitting .enquiry-form__submit { opacity: .65; pointer-events: none; }
