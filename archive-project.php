@@ -5,6 +5,7 @@ get_header();
 ?>
 <main class="page page--projects" id="main">
 	<div class="page__container">
+		<?php arcticrc_breadcrumbs(); ?>
 		<div class="page-heading"><h1 class="page-heading__title"><?php post_type_archive_title(); ?></h1></div>
 		<div class="collection">
 			<?php while ( have_posts() ) : the_post(); ?>
