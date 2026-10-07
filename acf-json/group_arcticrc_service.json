@@ -360,19 +360,41 @@
         },
         {
             "key": "field_arcticrc_service_projects",
-            "label": "Связанные проекты",
+            "label": "Карточки проектов",
             "name": "service_projects",
-            "type": "relationship",
-            "post_type": [
-                "project"
-            ],
-            "filters": [
-                "search"
-            ],
-            "elements": [
-                "featured_image"
-            ],
-            "return_format": "object"
+            "type": "repeater",
+            "instructions": "Проекты существуют только как карточки внутри услуги. Отдельных страниц проектов нет.",
+            "layout": "row",
+            "button_label": "Добавить проект",
+            "collapsed": "field_arcticrc_service_project_title",
+            "sub_fields": [
+                {
+                    "key": "field_arcticrc_service_project_image",
+                    "label": "Изображение",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_arcticrc_service_project_title",
+                    "label": "Текст",
+                    "name": "title",
+                    "type": "textarea",
+                    "rows": 3,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ]
         },
         {
             "key": "field_arcticrc_service_tab_contact",
@@ -438,5 +460,5 @@
     "active": true,
     "description": "Поля услуги ArcticRC.",
     "show_in_rest": 0,
-    "modified": 1791394000
+    "modified": 1791403000
 }
