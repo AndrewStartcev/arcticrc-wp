@@ -2,10 +2,9 @@
 defined( 'ABSPATH' ) || exit;
 
 $phone         = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
-$telegram_url  = arcticrc_option( 'site_telegram_url', 'https://telegram.org/' );
-$whatsapp_url  = arcticrc_option( 'site_whatsapp_url', 'https://www.whatsapp.com/' );
+$socials       = arcticrc_socials();
 $is_overlay    = arcticrc_header_is_media();
-$logo          = arcticrc_header_logo();
+$logo_url      = arcticrc_header_logo_url();
 $primary_items = arcticrc_menu_items( 'primary' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -23,7 +22,7 @@ $primary_items = arcticrc_menu_items( 'primary' );
 <?php endif; ?>
 <header class="site-header <?php echo $is_overlay ? 'site-header--on-media' : 'site-header--on-light'; ?>">
 	<a class="site-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Главная">
-		<img class="site-header__logo" src="<?php echo esc_url( arcticrc_asset_url( $logo ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="240" height="73">
+		<img class="site-header__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="240" height="73">
 	</a>
 	<details class="site-nav" data-site-nav>
 		<summary class="site-nav__toggle<?php echo $is_overlay ? ' site-nav__toggle--light' : ''; ?>" aria-label="Открыть или закрыть навигацию"><span class="site-nav__bars" aria-hidden="true"></span></summary>
@@ -35,7 +34,7 @@ $primary_items = arcticrc_menu_items( 'primary' );
 					<?php endforeach; ?>
 				<?php else : ?>
 					<a class="site-nav__link" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Услуги</a>
-					<a class="site-nav__link" href="<?php echo esc_url( home_url( '/equipment/' ) ); ?>">Оборудование</a>
+					<a class="site-nav__link" href="<?php echo esc_url( home_url( '/equipment-rent/' ) ); ?>">Оборудование</a>
 					<a class="site-nav__link" href="<?php echo esc_url( home_url( '/projects/' ) ); ?>">Проекты<span class="site-nav__projects-marker" aria-hidden="true"></span></a>
 					<a class="site-nav__link" href="<?php echo esc_url( home_url( '/#documents' ) ); ?>">Документация</a>
 				<?php endif; ?>
@@ -43,12 +42,17 @@ $primary_items = arcticrc_menu_items( 'primary' );
 			<a class="site-nav__phone" href="<?php echo esc_url( 'tel:' . arcticrc_phone_href( $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
 			<div class="site-nav__actions">
 				<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--compact action--navigation site-nav__project-action" data-dialog-open data-purpose="consultation" data-record-id="" href="#request"><span class="action__label">Обсудить проект</span></a>
-				<?php if ( $telegram_url ) : ?>
-					<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--icon action--social action--navigation-icon" href="<?php echo esc_url( $telegram_url ); ?>" aria-label="Telegram"><span class="action__label"><img class="action__image" src="<?php echo esc_url( arcticrc_asset_url( 'media/web/social-telegram.svg' ) ); ?>" alt=""></span></a>
-				<?php endif; ?>
-				<?php if ( $whatsapp_url ) : ?>
-					<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--icon action--social action--navigation-icon" href="<?php echo esc_url( $whatsapp_url ); ?>" aria-label="WhatsApp"><span class="action__label"><img class="action__image" src="<?php echo esc_url( arcticrc_asset_url( 'media/web/social-whatsapp.svg' ) ); ?>" alt=""></span></a>
-				<?php endif; ?>
+				<?php foreach ( $socials as $social ) : ?>
+					<a class="action <?php echo $is_overlay ? 'action--light' : 'action--outline'; ?> action--icon action--social action--navigation-icon" href="<?php echo esc_url( $social['url'] ); ?>" aria-label="<?php echo esc_attr( $social['name'] ?: $social['link_text'] ); ?>">
+						<span class="action__label">
+							<?php if ( $social['icon'] ) : ?>
+								<img class="action__image" src="<?php echo esc_url( $social['icon'] ); ?>" alt="">
+							<?php else : ?>
+								<span class="screen-reader-text"><?php echo esc_html( $social['link_text'] ); ?></span>
+							<?php endif; ?>
+						</span>
+					</a>
+				<?php endforeach; ?>
 			</div>
 		</nav>
 	</details>
