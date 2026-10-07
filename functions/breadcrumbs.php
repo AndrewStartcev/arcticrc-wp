@@ -22,7 +22,7 @@ function arcticrc_breadcrumb_items() {
 	if ( is_singular( 'service' ) ) {
 		$items[] = array(
 			'label' => 'Услуги',
-			'url'   => get_post_type_archive_link( 'service' ),
+			'url'   => home_url( '/services/' ),
 		);
 
 		$items[] = array(
