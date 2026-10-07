@@ -98,9 +98,9 @@
     "location": [
         [
             {
-                "param": "options_page",
+                "param": "page_template",
                 "operator": "==",
-                "value": "arcticrc-services-page"
+                "value": "page-services.php"
             }
         ]
     ],
@@ -111,7 +111,7 @@
     "instruction_placement": "label",
     "hide_on_screen": [],
     "active": true,
-    "description": "Настройки страницы /services/.",
+    "description": "Настройки обычной страницы /services/.",
     "show_in_rest": 0,
-    "modified": 1791396000
+    "modified": 1791399000
 }
