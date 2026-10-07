@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-5';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-6';
 
 
 /**
@@ -106,6 +106,7 @@ function arcticrc_seed_media_asset( $relative_path, $title = '' ) {
 			'post_mime_type' => $mime ?: 'application/octet-stream',
 			'post_title'     => $title ?: pathinfo( $filename, PATHINFO_FILENAME ),
 			'post_status'    => 'inherit',
+			'guid'           => $upload['url'],
 		),
 		$upload['file']
 	);
@@ -277,12 +278,6 @@ function arcticrc_seed_global_options() {
 		return;
 	}
 
-	$assets         = arcticrc_seed_registered_assets();
-	$logo_light_id  = isset( $assets['logo_light'] ) ? $assets['logo_light'] : 0;
-	$logo_blue_id   = isset( $assets['logo_blue'] ) ? $assets['logo_blue'] : 0;
-	$telegram_icon  = isset( $assets['telegram'] ) ? $assets['telegram'] : 0;
-	$whatsapp_icon  = isset( $assets['whatsapp'] ) ? $assets['whatsapp'] : 0;
-
 	$values = array(
 		'field_arcticrc_site_phone'         => '+7(916)-616-02-20',
 		'field_arcticrc_site_email'         => 'engineering@arcticrc.ru',
@@ -312,48 +307,87 @@ function arcticrc_seed_global_options() {
 		update_field( 'field_arcticrc_personal_data_url', $privacy_page->ID, 'option' );
 	}
 
-	if ( $logo_light_id && ! get_field( 'field_arcticrc_logo_light', 'option' ) ) {
+}
+
+/**
+ * Ensure theme-provided media really exists in the Media Library and ACF.
+ *
+ * This runs independently from the content seed version. If an upload failed
+ * once, WordPress retries on the next admin request until the attachment and
+ * field values actually exist.
+ */
+function arcticrc_sync_seed_media() {
+	if ( ! is_admin() || ! current_user_can( 'upload_files' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	$assets        = arcticrc_seed_registered_assets();
+	$logo_light_id = isset( $assets['logo_light'] ) ? (int) $assets['logo_light'] : 0;
+	$logo_blue_id  = isset( $assets['logo_blue'] ) ? (int) $assets['logo_blue'] : 0;
+	$telegram_icon = isset( $assets['telegram'] ) ? (int) $assets['telegram'] : 0;
+	$whatsapp_icon = isset( $assets['whatsapp'] ) ? (int) $assets['whatsapp'] : 0;
+
+	if ( $logo_light_id && ! get_field( 'site_logo_light', 'option' ) ) {
 		update_field( 'field_arcticrc_logo_light', $logo_light_id, 'option' );
 	}
 
-	if ( $logo_blue_id && ! get_field( 'field_arcticrc_logo_blue', 'option' ) ) {
+	if ( $logo_blue_id && ! get_field( 'site_logo_blue', 'option' ) ) {
 		update_field( 'field_arcticrc_logo_blue', $logo_blue_id, 'option' );
 	}
 
-	$socials = get_field( 'field_arcticrc_site_socials', 'option' );
+	$current_socials = get_field( 'site_socials', 'option' );
+	$rows            = array();
 
-	if ( empty( $socials ) || ! is_array( $socials ) ) {
-		$socials = array(
-			array(
-				'field_arcticrc_social_icon'      => $telegram_icon,
-				'field_arcticrc_social_name'      => 'Telegram',
-				'field_arcticrc_social_url'       => 'https://telegram.org/',
-				'field_arcticrc_social_link_text' => 'Telegram',
-			),
-			array(
-				'field_arcticrc_social_icon'      => $whatsapp_icon,
-				'field_arcticrc_social_name'      => 'WhatsApp',
-				'field_arcticrc_social_url'       => 'https://www.whatsapp.com/',
-				'field_arcticrc_social_link_text' => 'WhatsApp',
-			),
-		);
-	} else {
-		foreach ( $socials as &$social ) {
-			$name = strtolower( isset( $social['name'] ) ? $social['name'] : '' );
+	if ( is_array( $current_socials ) && $current_socials ) {
+		foreach ( $current_socials as $social ) {
+			$name = isset( $social['name'] ) ? trim( (string) $social['name'] ) : '';
+			$url  = isset( $social['url'] ) ? trim( (string) $social['url'] ) : '';
+			$icon = isset( $social['icon'] ) ? $social['icon'] : 0;
 
-			if ( empty( $social['icon'] ) && false !== strpos( $name, 'telegram' ) ) {
-				$social['icon'] = $telegram_icon;
+			if ( is_array( $icon ) && ! empty( $icon['ID'] ) ) {
+				$icon = (int) $icon['ID'];
+			} elseif ( is_array( $icon ) && ! empty( $icon['id'] ) ) {
+				$icon = (int) $icon['id'];
+			} else {
+				$icon = (int) $icon;
 			}
 
-			if ( empty( $social['icon'] ) && false !== strpos( $name, 'whatsapp' ) ) {
-				$social['icon'] = $whatsapp_icon;
+			$lower_name = strtolower( $name );
+
+			if ( ! $icon && false !== strpos( $lower_name, 'telegram' ) ) {
+				$icon = $telegram_icon;
 			}
+
+			if ( ! $icon && false !== strpos( $lower_name, 'whatsapp' ) ) {
+				$icon = $whatsapp_icon;
+			}
+
+			$rows[] = array(
+				'field_arcticrc_social_icon' => $icon,
+				'field_arcticrc_social_name' => $name,
+				'field_arcticrc_social_url'  => $url,
+			);
 		}
-		unset( $social );
 	}
 
-	update_field( 'field_arcticrc_site_socials', $socials, 'option' );
+	if ( ! $rows ) {
+		$rows = array(
+			array(
+				'field_arcticrc_social_icon' => $telegram_icon,
+				'field_arcticrc_social_name' => 'Telegram',
+				'field_arcticrc_social_url'  => 'https://telegram.org/',
+			),
+			array(
+				'field_arcticrc_social_icon' => $whatsapp_icon,
+				'field_arcticrc_social_name' => 'WhatsApp',
+				'field_arcticrc_social_url'  => 'https://www.whatsapp.com/',
+			),
+		);
+	}
+
+	update_field( 'field_arcticrc_site_socials', $rows, 'option' );
 }
+add_action( 'admin_init', 'arcticrc_sync_seed_media', 20 );
 
 /**
  * Provision the approved initial site content.
