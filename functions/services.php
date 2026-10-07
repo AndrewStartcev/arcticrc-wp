@@ -313,26 +313,38 @@ function arcticrc_seed_soil_testing_service() {
 add_action( 'admin_init', 'arcticrc_seed_soil_testing_service', 45 );
 
 
-function arcticrc_seed_services_archive_settings() {
+function arcticrc_services_page_id() {
+	$page = get_page_by_path( 'services', OBJECT, 'page' );
+
+	return $page ? (int) $page->ID : 0;
+}
+
+function arcticrc_seed_services_page_settings() {
 	if ( ! is_admin() || ! current_user_can( 'manage_options' ) || ! function_exists( 'update_field' ) ) {
 		return;
 	}
 
+	$page_id = arcticrc_services_page_id();
+
+	if ( ! $page_id ) {
+		return;
+	}
+
 	$defaults = array(
-		'field_arcticrc_services_archive_title'  => 'Уверенность начинается с основания',
-		'field_arcticrc_services_contact_title'  => 'Начнем с разговора — доведем до результата',
-		'field_arcticrc_services_contact_intro'  => 'Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис! Мы ответим на ваши вопросы',
+		'field_arcticrc_services_archive_title' => 'Уверенность начинается с основания',
+		'field_arcticrc_services_contact_title' => 'Начнем с разговора — доведем до результата',
+		'field_arcticrc_services_contact_intro' => 'Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис! Мы ответим на ваши вопросы',
 	);
 
 	foreach ( $defaults as $field_key => $value ) {
-		$current = get_field( $field_key, 'option' );
+		$current = get_field( $field_key, $page_id );
 
 		if ( null === $current || '' === $current ) {
-			update_field( $field_key, $value, 'option' );
+			update_field( $field_key, $value, $page_id );
 		}
 	}
 
-	if ( ! get_field( 'field_arcticrc_services_archive_items', 'option' ) ) {
+	if ( ! get_field( 'field_arcticrc_services_archive_items', $page_id ) ) {
 		$services = get_posts(
 			array(
 				'post_type'      => 'service',
@@ -347,18 +359,20 @@ function arcticrc_seed_services_archive_settings() {
 		);
 
 		if ( $services ) {
-			update_field( 'field_arcticrc_services_archive_items', $services, 'option' );
+			update_field( 'field_arcticrc_services_archive_items', $services, $page_id );
 		}
 	}
 }
-add_action( 'admin_init', 'arcticrc_seed_services_archive_settings', 46 );
+add_action( 'admin_init', 'arcticrc_seed_services_page_settings', 46 );
 
-function arcticrc_services_archive_block_visible( $field_name ) {
-	if ( ! function_exists( 'get_field' ) ) {
+function arcticrc_services_page_block_visible( $field_name, $page_id = 0 ) {
+	$page_id = $page_id ? (int) $page_id : arcticrc_services_page_id();
+
+	if ( ! $page_id || ! function_exists( 'get_field' ) ) {
 		return true;
 	}
 
-	$value = get_field( $field_name, 'option' );
+	$value = get_field( $field_name, $page_id );
 
 	return false !== $value && '0' !== (string) $value;
 }
