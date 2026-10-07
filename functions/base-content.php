@@ -174,7 +174,11 @@ function arcticrc_seed_global_options() {
 	);
 
 	foreach ( $values as $field_key => $value ) {
-		update_field( $field_key, $value, 'option' );
+		$current = get_field( $field_key, 'option' );
+
+		if ( null === $current || '' === $current || false === $current ) {
+			update_field( $field_key, $value, 'option' );
+		}
 	}
 }
 
@@ -237,6 +241,9 @@ function arcticrc_seed_base_content() {
 		array(
 			array( 'title' => 'Полевые испытания грунтов сваями', 'url' => '/services/soil-testing/' ),
 			array( 'title' => 'Аренда оборудования и спецтехники', 'url' => '/equipment-rent/' ),
+			array( 'title' => 'Инженерные изыскания', 'url' => '/services/' ),
+			array( 'title' => 'Геодезические изыскания', 'url' => '/services/' ),
+			array( 'title' => 'Лабораторные исследования', 'url' => '/services/' ),
 		)
 	);
 
