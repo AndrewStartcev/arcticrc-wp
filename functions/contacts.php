@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTACTS_SEED_VERSION = '2026-10-07-1';
+const ARCTICRC_CONTACTS_SEED_VERSION = '2026-10-07-2';
 
 function arcticrc_contacts_page_id() {
 	$page = get_page_by_path( 'contacts', OBJECT, 'page' );
@@ -52,15 +52,31 @@ function arcticrc_seed_contacts_page() {
 		'field_arcticrc_contacts_intro'       => "Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис!
 
 Мы ответим на ваши вопросы",
-		'field_arcticrc_contacts_map_mode'    => 'image',
+		'field_arcticrc_contacts_map_mode'    => 'map',
+		'field_arcticrc_contacts_map_lat'     => '55.7294',
+		'field_arcticrc_contacts_map_lng'     => '37.6468',
 		'field_arcticrc_contacts_map_zoom'    => 16,
 	);
+
+	$previous_seed = get_post_meta( $page_id, '_arcticrc_contacts_seed_version', true );
 
 	foreach ( $defaults as $field_key => $value ) {
 		$current = get_field( $field_key, $page_id );
 
 		if ( null === $current || '' === $current ) {
 			update_field( $field_key, $value, $page_id );
+		}
+	}
+
+	if ( ARCTICRC_CONTACTS_SEED_VERSION !== $previous_seed ) {
+		update_field( 'field_arcticrc_contacts_map_mode', 'map', $page_id );
+
+		if ( ! get_field( 'contacts_map_lat', $page_id ) ) {
+			update_field( 'field_arcticrc_contacts_map_lat', '55.7294', $page_id );
+		}
+
+		if ( ! get_field( 'contacts_map_lng', $page_id ) ) {
+			update_field( 'field_arcticrc_contacts_map_lng', '37.6468', $page_id );
 		}
 	}
 
