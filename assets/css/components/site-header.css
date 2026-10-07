@@ -10,4 +10,4 @@
 }
 @media (max-width: 1170px) { .site-header:has(.site-nav[open][data-nav-enhanced]) { position: fixed; inset: 0 0 auto; z-index: 10; } }
 @media (max-width: 1170px) { .site-header:has(.site-nav[open]:not([data-nav-enhanced])) { flex-wrap: wrap; } }
-@media (max-width: 1170px) { .site-header:has(.site-nav[open]) .site-header__logo { content: url('../../media/web/logo-99-1385.svg'); } }
+@media (max-width: 1170px) { .site-header:has(.site-nav[open]) .site-header__logo { content: var(--header-menu-logo); } }
