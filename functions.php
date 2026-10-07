@@ -13,6 +13,7 @@ foreach ( array(
 	'/functions/home.php',
 	'/functions/services.php',
 	'/functions/equipment.php',
+	'/functions/contacts.php',
 	'/functions/remove-functions.php',
 ) as $arcticrc_file ) {
 	require_once get_template_directory() . $arcticrc_file;
