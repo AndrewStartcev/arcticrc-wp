@@ -118,6 +118,74 @@ add_filter( 'post_type_link', 'arcticrc_service_permalink', 10, 2 );
 function arcticrc_service_rewrite_rules() {
 	add_rewrite_rule(
 		'^services/([^/]+)/([^/]+)/?
+,
+		'index.php?service=$matches[2]&service_direction=$matches[1]',
+		'top'
+	);
+
+	add_rewrite_rule(
+		'^services/([^/]+)/?
+add_action( 'init', 'arcticrc_service_rewrite_rules', 20 );
+
+function arcticrc_flush_rewrite_rules() {
+	arcticrc_register_content_types();
+	arcticrc_service_rewrite_rules();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'arcticrc_flush_rewrite_rules' );
+,
+		'index.php?service=$matches[1]',
+		'top'
+	);
+}
+add_action( 'init', 'arcticrc_service_rewrite_rules', 20 );
+
+function arcticrc_flush_rewrite_rules() {
+	arcticrc_register_content_types();
+	arcticrc_service_rewrite_rules();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'arcticrc_flush_rewrite_rules' );
+,
+		'index.php?service=$matches[2]&service_direction=$matches[1]',
+		'top'
+	);
+
+	add_rewrite_rule(
+		'^services/([^/]+)/?
+,
+		'index.php?service=$matches[2]&service_direction=$matches[1]',
+		'top'
+	);
+
+	add_rewrite_rule(
+		'^services/([^/]+)/?
+add_action( 'init', 'arcticrc_service_rewrite_rules', 20 );
+
+function arcticrc_flush_rewrite_rules() {
+	arcticrc_register_content_types();
+	arcticrc_service_rewrite_rules();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'arcticrc_flush_rewrite_rules' );
+,
+		'index.php?service=$matches[1]',
+		'top'
+	);
+}
+add_action( 'init', 'arcticrc_service_rewrite_rules', 20 );
+
+function arcticrc_flush_rewrite_rules() {
+	arcticrc_register_content_types();
+	arcticrc_service_rewrite_rules();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'arcticrc_flush_rewrite_rules' );
+,
+		'index.php?service=$matches[1]',
+		'top'
+	);
+}
 add_action( 'init', 'arcticrc_service_rewrite_rules', 20 );
 
 function arcticrc_flush_rewrite_rules() {
