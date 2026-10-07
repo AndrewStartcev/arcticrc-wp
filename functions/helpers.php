@@ -76,3 +76,77 @@ function arcticrc_overlay_page_class() {
 
 	return 'page page--overlay';
 }
+
+
+function arcticrc_image_url( $value, $fallback_asset = '' ) {
+	if ( is_array( $value ) && ! empty( $value['url'] ) ) {
+		return $value['url'];
+	}
+
+	if ( is_numeric( $value ) ) {
+		$url = wp_get_attachment_image_url( (int) $value, 'full' );
+		if ( $url ) {
+			return $url;
+		}
+	}
+
+	if ( is_string( $value ) && filter_var( $value, FILTER_VALIDATE_URL ) ) {
+		return $value;
+	}
+
+	return $fallback_asset ? arcticrc_asset_url( $fallback_asset ) : '';
+}
+
+function arcticrc_header_logo_url() {
+	$field = arcticrc_header_is_media() ? 'site_logo_light' : 'site_logo_blue';
+	$fallback = arcticrc_header_is_media()
+		? 'media/web/logo-99-4083.svg'
+		: 'media/web/logo-99-1171.svg';
+
+	return arcticrc_image_url( arcticrc_option( $field, '' ), $fallback );
+}
+
+function arcticrc_social_fallback_icon( $name ) {
+	$name = strtolower( trim( (string) $name ) );
+
+	if ( false !== strpos( $name, 'telegram' ) ) {
+		return arcticrc_asset_url( 'media/web/social-telegram.svg' );
+	}
+
+	if ( false !== strpos( $name, 'whatsapp' ) ) {
+		return arcticrc_asset_url( 'media/web/social-whatsapp.svg' );
+	}
+
+	return '';
+}
+
+function arcticrc_socials() {
+	$socials = arcticrc_option( 'site_socials', array() );
+
+	if ( ! is_array( $socials ) ) {
+		return array();
+	}
+
+	$normalized = array();
+
+	foreach ( $socials as $social ) {
+		$name = isset( $social['name'] ) ? trim( (string) $social['name'] ) : '';
+		$url = isset( $social['url'] ) ? trim( (string) $social['url'] ) : '';
+
+		if ( ! $url ) {
+			continue;
+		}
+
+		$normalized[] = array(
+			'name'      => $name,
+			'url'       => $url,
+			'link_text' => ! empty( $social['link_text'] ) ? $social['link_text'] : $name,
+			'icon'      => arcticrc_image_url(
+				isset( $social['icon'] ) ? $social['icon'] : '',
+				''
+			) ?: arcticrc_social_fallback_icon( $name ),
+		);
+	}
+
+	return $normalized;
+}
