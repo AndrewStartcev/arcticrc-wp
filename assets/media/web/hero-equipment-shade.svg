@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" preserveAspectRatio="none">
+  <defs><linearGradient id="shade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0" gradientTransform="matrix(.535563363770265 -.055921060008683 .027960531875263 .934825151766264 .007042253959521 .687500006940967)"><stop stop-color="#000"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
+  <path d="M0 0H1V1H0Z" fill="url(#shade)" opacity=".4"/>
+</svg>

@@ -1,0 +1,10 @@
+:root {
+  --color-ink: #1e505e;
+  --color-muted: #78969e;
+  --color-accent: #19a0c8;
+  --color-outline: #19a0c8;
+  --color-page: #f1f1f2;
+  --color-surface: #ffffff;
+  --font-body: 'Rubik', sans-serif;
+  --font-heading: 'Rubik', sans-serif;
+}

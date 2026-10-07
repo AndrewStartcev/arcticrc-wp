@@ -1,0 +1,5 @@
+.enquiry-section { display: grid; grid-template-columns: var(--enquiry-columns, repeat(2, minmax(0, 1fr))); gap: 20px; margin-top: 140px; scroll-margin-top: 20px; }
+.enquiry-section__form { margin-top: var(--enquiry-form-offset, 24px); }
+.enquiry-section--contacts { margin-top: 46px; --enquiry-columns: 1.02fr 1fr; --enquiry-form-offset: 0px; }
+@media (max-width: 900px) { .enquiry-section { grid-template-columns: 1fr; } .enquiry-section__form { margin-top: 0; } }
+@media (max-width: 740px) { .enquiry-section { gap: 30px; margin-top: 100px; } .enquiry-section--contacts { margin-top: 28px; } }

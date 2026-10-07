@@ -1,0 +1,7 @@
+.document-card { min-width: 0; background: white; padding: 24px 25px 22px; display: flex; flex-direction: column; gap: 25px; }
+.document-card__title { font: 400 20px/.98 var(--font-heading); text-transform: uppercase; letter-spacing: -.03em; }
+.document-card__details { margin-top: auto; display: grid; gap: 12px; }
+.document-card__metadata { display: flex; gap: 10px; }
+.document-card__fact { flex: 1; min-width: 0; background: #fafafa; padding: 10px; line-height: .98; letter-spacing: -.01em; }
+.document-card__fact-label { display: block; color: var(--color-muted); font-size: 12px; line-height: 1; letter-spacing: -.05em; margin-bottom: 6px; }
+@media (max-width: 600px) { .document-card { gap: 18px; padding: 20px 15px 15px; } .document-card__title { font-size: 15px; line-height: 1.07; letter-spacing: -.03em; } .document-card__metadata { flex-direction: column; gap: 4px; } .document-card__fact { font-size: 12px; line-height: .98; letter-spacing: -.01em; } .document-card__fact-label { font-size: 10px; line-height: 1; letter-spacing: -.05em; margin-bottom: 6px; } .document-card__action { font-size: 12px; line-height: 1.185; padding: 14px 5px; gap: 7px; } }

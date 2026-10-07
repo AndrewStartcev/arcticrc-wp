@@ -1,0 +1,56 @@
+.page__container { max-width: 1440px; padding-inline: 40px; margin-inline: auto; }
+.page__contact-heading { max-width: 962px; }
+.page__detail-heading { max-width: 1440px; margin-inline: auto; padding-inline: 40px; }
+.page__detail-breadcrumbs { padding-inline-start: 47px; }
+.page__hero { margin: 10px; display: grid; }
+.page__hero:empty { display: none; }
+/* The source header overlays the hero while remaining outside the main landmark. */
+.page--overlay { position: relative; }
+.page__header { z-index: 2; margin: 10px; min-width: 0; }
+.page__header--overlay { position: absolute; inset: 0 10px auto; margin: 0; }
+.page__main { min-width: 0; }
+.page__section { margin-top: 140px; scroll-margin-top: 25px; }
+.page__section--after-hero { margin-top: 110px; }
+.page__section-content { margin-top: var(--section-content-gap, 60px); }
+.page__section-content--full { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; min-width: 0; }
+.page__section--services { --section-content-gap: 42px; }
+.page__section--prices { --section-content-gap: 66px; }
+/* Source gap64px, accounting for the CSS heading box being 1px taller. */
+.page__section--company { --section-content-gap: 63px; }
+.page__section--equipment { --section-content-gap: 49px; --section-content-gap-mobile: 49px; }
+.page__section--clients, .page__section--projects { display: grid; grid-template-columns: minmax(40px, 1fr) minmax(0, 1360px) minmax(40px, 1fr); --rail-gutter: 40px; }
+.page__section-heading { grid-column: 2; min-width: 0; margin-inline-start: var(--section-heading-inset, 0px); }
+.page__section--map { --section-content-gap: 45px; }
+.page__section--projects { padding-bottom: 9px; --rail-gutter: max(40px, calc((100% - 1360px) / 2)); --section-content-gap: 38px; --section-content-gap-mobile: 38px; --section-heading-inset: 10px; }
+.page__cards { margin-top: 64px; }
+/* Keep the listing's title-to-grid rhythm without moving detail-page cards. */
+.page__cards--services { margin-top: 62px; }
+.page__intro { position: relative; isolation: isolate; }
+/* Source scenery stays behind the final cards; its spacing follows their flow. */
+.page__scenery {
+  position: relative;
+  z-index: -1;
+  container-type: inline-size;
+  margin-top: clamp(-202px, calc(-216.486px + 3.714vw), -163px);
+}
+.page__scenery-image {
+  width: 100%;
+  block-size: clamp(793px, calc(747.686px + 11.619cqw), 915px);
+  object-fit: cover;
+  filter: saturate(.83);
+}
+.page__scenery::after {
+  content: '';
+  position: absolute;
+  inset: -55px 0 0;
+  background:
+    linear-gradient(#f1f1f2, #f1f1f200) 0 55px / 100% 343px no-repeat,
+    linear-gradient(#f1f1f2, #f1f1f200) 0 0 / 100% 366px no-repeat;
+  pointer-events: none;
+}
+@media (max-width: 740px) { .page__header--overlay { inset: 0 0 auto; } .page__section--clients, .page__section--projects { grid-template-columns: 10px minmax(0, 1fr) 10px; --rail-gutter: 10px; } .page__container { padding-inline: 10px; } .page__detail-heading { padding-inline: 10px; } .page__hero, .page__header { margin: 0; } .page__section { margin-top: 100px; } .page__section--after-hero { margin-top: 60px; } .page__section-content { margin-top: var(--section-content-gap-mobile, 30px); } .page__cards { margin-top: 30px; } }
+.page { min-width: 0; }
+@media (max-width: 600px) {
+  .page__section--equipment { --section-content-gap-mobile: 28px; }
+  .page__section--projects { padding-bottom: 0; --section-content-gap-mobile: 36px; --section-heading-inset: 0px; }
+}

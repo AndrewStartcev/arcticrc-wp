@@ -1,0 +1,8 @@
+.test-card { display: flex; flex-direction: column; gap: 26px; padding: 10px 7px 10px 10px; background: white; min-width: 0; scroll-snap-align: start; }
+.test-card__top { display: flex; justify-content: space-between; gap: 20px; }
+.test-card__image { width: 123px; height: 92px; object-fit: cover; }
+.test-card__number { color: var(--color-outline); font: 500 16px/.98 var(--font-body); letter-spacing: -.01em; }
+.test-card__bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: auto; padding-right: 3px; }
+.test-card__title { min-width: 0; font: 400 18px/.98 var(--font-heading); text-transform: uppercase; letter-spacing: -.03em; margin-bottom: 10px; }
+.test-card__action { margin-top: 6px; }
+@media (max-width: 600px) { .test-card { padding: 10px; } .test-card__bottom { padding-right: 0; } .test-card__number { font-family: 'Manrope', sans-serif; } .test-card__title { line-height: 1.13; margin-bottom: 6px; } }

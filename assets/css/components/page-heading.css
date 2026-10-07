@@ -1,0 +1,15 @@
+.page-heading { min-width: 0; container-type: inline-size; }
+.page-heading__title { font: 400 var(--page-heading-title-size, 96px)/var(--page-heading-title-leading, .9) var(--font-heading); text-transform: uppercase; letter-spacing: -.03em; }
+.page-heading__lead { margin-top: var(--page-heading-lead-margin, 34px); max-width: var(--page-heading-lead-width, none); color: var(--page-heading-lead-color, inherit); font-size: var(--page-heading-lead-size, 20px); line-height: var(--page-heading-lead-leading, inherit); letter-spacing: var(--page-heading-lead-spacing, -.02em); }
+.page-heading__lead--detail { font-family: 'Manrope', sans-serif; font-weight: 500; line-height: 1.2; }
+.page-heading--section { --page-heading-title-size: 50px; --page-heading-title-leading: var(--section-title-leading, 1.05); --page-heading-lead-size: 14px; --page-heading-lead-width: 500px; --page-heading-lead-margin: 36px; --page-heading-lead-color: #396572; }
+.page-heading--geography { max-width: 920px; --page-heading-lead-width: 394px; --page-heading-lead-margin: 38px; --page-heading-lead-leading: 1.45; --page-heading-lead-spacing: -.01em; }
+.page-heading--clients { max-width: 739px; }
+.page-heading--documents { max-width: 555px; --page-heading-lead-margin: 35px; --page-heading-lead-leading: 1.45; --page-heading-lead-width: 492px; }
+.page-heading--company { max-width: 775px; }
+@media (max-width: 1100px) { .page-heading { --page-heading-title-size: clamp(44px, 6.66vw, 96px); --page-heading-title-leading: 1; } .page-heading--section { --page-heading-title-size: 50px; --page-heading-title-leading: var(--section-title-leading, 1.05); } }
+@media (max-width: 600px) { .page-heading { --page-heading-title-size: clamp(30px, 12.1622cqw, 45px); --page-heading-lead-margin: 10px; --page-heading-lead-size: 14px; } .page-heading--section { --page-heading-title-size: 35px; --page-heading-title-leading: var(--section-title-leading, .97); --page-heading-lead-margin: 30px; } .page-heading--services { --section-title-leading: .74; } .page-heading--geography { max-width: 345px; --page-heading-lead-margin: 15px; --page-heading-lead-width: 324px; } }
+/* The source title uses a wider text measure than its neighbours. Reclaim only
+   the 1px needed for browser shaping, keeping the painted text inside the page. */
+@media (max-width: 600px) { .page-heading--detail { --page-heading-title-size: clamp(30px, 11.8919cqw, 44px); } .page-heading__title--detail { inline-size: calc(100% + 1px); } .page-heading__lead--detail { font-family: var(--font-body); font-weight: 400; } }
+@media (max-width: 600px) { .page-heading--documents { --page-heading-lead-margin: 18px; --page-heading-lead-width: 364px; } }

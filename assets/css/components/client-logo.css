@@ -1,0 +1,10 @@
+.client-logo { display: flex; align-items: center; justify-content: center; border: 1px solid #ccced0; aspect-ratio: 216/135; scroll-snap-align: start; }
+/* Artwork scales inside equal tiles; the source frames include transparent space. */
+.client-logo__image { inline-size: var(--logo-share, 81.31%); max-inline-size: var(--logo-width, 174px); block-size: auto; min-inline-size: 0; min-block-size: 0; aspect-ratio: var(--logo-aspect-ratio, auto); object-fit: var(--logo-object-fit, contain); filter: grayscale(1); mix-blend-mode: var(--logo-blend, normal); }
+.client-logo--gazprom { --logo-share: 54.67%; --logo-width: 117px; --logo-aspect-ratio: 117/102; --logo-object-fit: fill; }
+.client-logo--alrosa { --logo-share: 73.83%; --logo-width: 158px; }
+.client-logo--transneft { --logo-share: 82.24%; --logo-width: 176px; --logo-blend: multiply; }
+.client-logo--rosatom { --logo-share: 61.68%; --logo-width: 132px; --logo-blend: multiply; }
+.client-logo--rosneft { --logo-share: 93.93%; --logo-width: 201px; }
+@supports (mix-blend-mode: plus-darker) { .client-logo--rosatom { --logo-blend: plus-darker; } }
+@media (max-width: 600px) { .client-logo { aspect-ratio: 179/115; scroll-snap-align: none; } }

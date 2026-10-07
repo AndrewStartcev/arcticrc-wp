@@ -1,0 +1,6 @@
+.enquiry-dialog { padding: 36px 0 0; border: 0; width: min(620px, calc(100% - 20px)); max-width: calc(100% - 20px); max-height: calc(100dvh - 20px); overflow-y: auto; color: var(--color-ink); background: white; }
+.enquiry-dialog::backdrop { background: #123d4fc9; }
+.enquiry-dialog--equipment { padding-top: 0; width: min(785px, calc(100% - 20px)); }
+.enquiry-dialog__close { position: absolute; right: 2px; top: 2px; width: 40px; height: 40px; border: 0; background: url('../../media/web/icon-close.svg') center / 24px no-repeat; color: var(--color-accent); font-size: 0; }
+@media (hover: hover) { .enquiry-dialog__close:hover { background-color: #d9eef4; } }
+.enquiry-dialog__close:active { background-color: #b7dee9; }

@@ -1,0 +1,25 @@
+.scroll-return {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 8;
+  display: flex;
+  padding: 4px;
+  background: var(--color-surface);
+  box-shadow: 0 2px 12px rgb(30 80 94 / .18);
+}
+.scroll-return[hidden] { display: none; }
+.scroll-return__button[aria-disabled="true"] { opacity: .4; cursor: default; }
+.scroll-return__arrow {
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  mask: url('../../media/web/icon-arrow-rail-prev.svg') center / contain no-repeat;
+}
+.scroll-return__arrow--up { transform: rotate(90deg); }
+.scroll-return__arrow--down { transform: rotate(-90deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-return__arrow { transition: transform .2s ease; }
+}
+body:has(.site-nav[open][data-nav-enhanced]) .scroll-return,
+body:has(.enquiry-dialog[open]) .scroll-return { visibility: hidden; }

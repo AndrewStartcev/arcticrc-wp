@@ -1,0 +1,28 @@
+.contact-details { padding: 26px 20px 20px; background: white; }
+.contact-details__heading { margin-bottom: 36px; }
+.contact-details--shared { padding: 0; background: transparent; --contact-intro-size: 14px; --contact-intro-leading: 1.45; --contact-intro-width: 450px; --contact-intro-gap: 26px; }
+.contact-details__intro { font-size: var(--contact-intro-size, 20px); color: #396572; line-height: var(--contact-intro-leading, 1.41); max-width: var(--contact-intro-width, 490px); margin-bottom: var(--contact-intro-gap, 30px); letter-spacing: -.01em; white-space: pre-line; }
+.contact-details__rows { display: grid; gap: 8px; }
+.contact-details__row { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: #f6f6f6; padding: 11px 10px 11px 20px; }
+.contact-details__value { min-width: 0; overflow-wrap: anywhere; line-height: .98; letter-spacing: -.01em; }
+.contact-details__label { display: block; font-size: 12px; line-height: 1; letter-spacing: -.05em; color: var(--color-muted); margin-bottom: 5px; }
+.contact-details__link { text-decoration: none; }
+@media (hover: hover) { .contact-details__link:hover { color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .22em; } }
+.contact-details__actions { display: flex; gap: 6px; flex: 0 0 258px; }
+.contact-details__action { flex: 1; padding-block: 10.705px; }
+.contact-details__channel-icon { display: none; width: 40px; height: 38px; object-fit: contain; }
+@media (max-width: 1280px) { .contact-details__row { flex-wrap: wrap; } }
+@media (max-width: 740px) {
+ .contact-details { background: transparent; padding: 0; }
+ .contact-details__heading { width: calc(100% + 10px); margin-bottom: 24px; }
+ .contact-details__intro { font-size: 14px; line-height: var(--contact-intro-leading, 1.4); margin-bottom: 22px; max-width: 340px; white-space: normal; }
+ .contact-details__rows { gap: 10px; }
+ .contact-details__row { flex-wrap: nowrap; padding: 11px 13px; background: #fafafa; gap: 12px; }
+ .contact-details__channel-label { display: none; }
+ .contact-details__channel-marker { display: none; }
+ .contact-details__channel-icon { display: block; }
+ .contact-details__actions { flex: 0 0 auto; }
+ .contact-details__action { flex: initial; }
+ .contact-details__action--social { padding: 0; }
+}
+@media (max-width: 359px) { .contact-details__row { flex-wrap: wrap; } }

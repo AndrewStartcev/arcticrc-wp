@@ -1,0 +1,4 @@
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 4px; font-size: 15px; line-height: 18px; letter-spacing: -.02em; margin-block: 48px 44px; }
+.breadcrumbs__link { text-decoration: none; }
+@media (hover: hover) { .breadcrumbs__link:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .22em; } }
+@media (max-width: 600px) { .breadcrumbs { margin-block: 20px 21px; font-size: 14px; line-height: 1.2; } }

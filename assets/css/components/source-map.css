@@ -1,0 +1,8 @@
+.source-map { margin-top: 50px; container-type: inline-size; }
+.source-map--geography { margin-top: 0; }
+.source-map__image { width: 100%; object-fit: cover; }
+/* Native map windows: location 370/1360 by 473; geography 370x504 and
+   1360x731. Interpolate only the image window, leaving text in normal flow. */
+.source-map__image--location { height: min(473px, 127.8378cqw); }
+.source-map__image--geography { height: min(731px, 136.2162cqw, calc(419.162px + 22.9293cqw)); }
+@media (max-width: 600px) { .source-map--location { margin-top: 30px; } }

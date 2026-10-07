@@ -1,0 +1,38 @@
+.media-hero { display: grid; grid-template-columns: minmax(0, 1fr); isolation: isolate; color: white; scroll-snap-align: start; min-width: 0; width: 100%; }
+.media-hero__media { display: block; grid-area: 1/1; grid-row: var(--hero-media-grid-row, 1); min-width: 0; min-height: 0; contain: size; z-index: -2; }
+.media-hero__image { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; object-position: var(--hero-photo-position, center top); }
+.media-hero::after { content: ''; grid-area: 1/1; background: rgb(0 0 0 / .3); z-index: -1; pointer-events: none; }
+.media-hero--equipment::after { background: url('../../media/web/hero-equipment-shade.svg') center / 100% 100% no-repeat rgb(0 0 0 / .2); }
+.media-hero__content { display: var(--hero-content-display, block); flex-direction: var(--hero-content-direction, row); grid-area: 1/1; grid-row: var(--hero-content-grid-row, 1); min-width: 0; width: 100%; max-width: 1420px; margin-inline: auto; padding: var(--hero-content-padding, 150px 60px 60px); }
+.media-hero__details { margin-top: var(--hero-details-margin-top, 194px); padding-top: var(--hero-details-padding-top, 0); padding-inline: var(--hero-details-padding-inline, 0); }
+.media-hero__description { font-size: 20px; line-height: 1.2; letter-spacing: -.02em; max-width: var(--hero-description-width, 640px); }
+.media-hero__description--compact { --hero-description-width: 484px; --hero-description-width-mobile: 275px; }
+.media-hero__bullets { padding-left: 30px; font-size: 20px; line-height: 1.2; letter-spacing: -.02em; }
+.media-hero__actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: var(--hero-actions-margin-top, 40px); padding: var(--hero-actions-padding, 0); }
+/* 192px in Figma minus the 0.8px difference in the two-line CSS text box. */
+.media-hero--home { --hero-details-margin-top: 191.2px; }
+.media-hero__heading { max-width: 780px; }
+/* Center the native 1420px photo. Progressively retain the established wide
+   focal point as the cover crop grows; this affects only the photograph. */
+.media-hero--equipment { grid-area: 1/1; display: grid; container-type: inline-size; --hero-photo-position: center max(80%, calc(50% + min(0px, (1420px - 100cqw) / 3))); --hero-content-display: flex; --hero-content-direction: column; --hero-content-padding: 120px 60px 60px; --hero-details-margin-top: auto; --hero-details-padding-top: 40px; }
+/* Source photo floors: 796px through mobile, 760px from 880px onward.
+   The Grid row still grows when text needs more room. */
+.media-hero::before { content: ''; grid-area: 1/1; block-size: clamp(760px, calc(873.143px - 12.857vw), 796px); pointer-events: none; }
+@media (max-width: 1100px) { .media-hero { --hero-details-margin-top: 120px; } .media-hero--home { --hero-details-margin-top: 191.2px; } .media-hero--equipment { --hero-details-margin-top: auto; } .media-hero__content { padding-inline: 30px; } }
+/* Share the rail's content/control rows; the photo still covers both. */
+@media (min-width: 601px) and (max-width: 880px) {
+ .media-hero--home { display: grid; grid-row: 1 / span 2; grid-template-rows: subgrid; --hero-media-grid-row: 1 / span 2; --hero-content-grid-row: 1; --hero-content-padding: 150px 60px 24px; }
+ .media-hero--home::before, .media-hero--home::after { grid-row: 1 / span 2; }
+}
+@media (max-width: 600px) {
+ .media-hero { --hero-content-padding: 110px 10px 350px; --hero-details-margin-top: 120px; --hero-actions-margin-top: 38px; --hero-actions-padding: 0 0 0 4px; }
+ .media-hero__content { padding-inline: 10px; }
+ .media-hero__heading { max-width: 370px; }
+ .media-hero--home { --hero-content-padding: 112px 10px 350px; --hero-details-margin-top: 25px; }
+ .media-hero__image { object-position: 66% top; }
+ .media-hero__bullets { font-size: 14px; line-height: 1.2; padding-left: 20px; }
+ .media-hero__actions { flex-direction: column; align-items: stretch; gap: 14px; max-width: 268px; }
+ .media-hero__description { font-size: 14px; line-height: 1.2; max-width: var(--hero-description-width-mobile, 290px); }
+ .media-hero--equipment { --hero-content-padding: 80px 10px 42px; --hero-details-margin-top: auto; --hero-details-padding-inline: 10px; --hero-actions-margin-top: 30px; --hero-actions-padding: 0; }
+ .media-hero--equipment::after { background-color: rgb(0 0 0 / .3); }
+}

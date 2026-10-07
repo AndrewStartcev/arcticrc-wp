@@ -1,0 +1,13 @@
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 22px 30px; }
+.site-header--on-light { padding-inline-start: 24px; }
+.site-header__brand { flex: 0 1 auto; position: relative; z-index: 6; }
+.site-header__logo { width: var(--header-logo-width, 240px); height: auto; }
+.site-header--on-media { color: white; position: relative; z-index: 2; grid-area: 1/1; align-self: start; width: 100%; }
+@media (max-width: 1170px) {
+ .site-header { padding: var(--header-padding, 10px); gap: 20px; --header-logo-width: 164px; }
+ .site-header:has(.site-nav[open]) { --header-logo-width: 240px; --header-padding: 1px 1px 10px 7px; align-items: flex-start; }
+ .site-header:has(.site-nav[open]) .site-header__brand { padding-top: 23px; }
+}
+@media (max-width: 1170px) { .site-header:has(.site-nav[open][data-nav-enhanced]) { position: fixed; inset: 0 0 auto; z-index: 10; } }
+@media (max-width: 1170px) { .site-header:has(.site-nav[open]:not([data-nav-enhanced])) { flex-wrap: wrap; } }
+@media (max-width: 1170px) { .site-header:has(.site-nav[open]) .site-header__logo { content: url('../../media/web/logo-99-1385.svg'); } }

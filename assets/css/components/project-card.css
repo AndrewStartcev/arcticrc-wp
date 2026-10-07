@@ -1,0 +1,4 @@
+.project-card { min-width: 0; scroll-snap-align: start; }
+.project-card__image { width: 100%; aspect-ratio: 670/504; object-fit: cover; }
+.project-card__title { font: 400 25px/.98 var(--font-heading); letter-spacing: -.03em; text-transform: uppercase; margin-top: 25px; }
+@media (max-width: 600px) { .project-card__image { aspect-ratio: 370/364; } .project-card__title { font-size: 18px; line-height: 1.19; margin-top: 20px; } }

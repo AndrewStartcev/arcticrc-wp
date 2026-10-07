@@ -1,0 +1,6 @@
+.collection { display: grid; gap: 20px; }
+.collection--services, .collection--equipment { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.collection--documents { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1050px) { .collection--services, .collection--equipment { grid-template-columns: repeat(2, minmax(0, 1fr)); } .collection--documents { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .collection--services, .collection--equipment { grid-template-columns: 1fr; gap: 20px; } .collection--documents { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; } }
+@media (max-width: 600px) { .collection--services { row-gap: 15px; } }

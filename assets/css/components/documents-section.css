@@ -1,0 +1,6 @@
+.documents-section { position: relative; isolation: isolate; }
+.documents-section__background { position: absolute; inset: 92px 0 0; height: calc(100% - 92px); width: 100%; object-fit: cover; z-index: -2; }
+.documents-section::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(#f1f1f2, #f1f1f200) 0 37px / 100% 214px no-repeat, linear-gradient(#f1f1f2, #f1f1f200) 0 92px / 100% 381px no-repeat; }
+.documents-section__inner { max-width: 1440px; margin-inline: auto; padding: 135px 40px 26px; }
+.documents-section__cards { margin-top: 364px; }
+@media (max-width: 740px) { .documents-section__inner { padding: 100px 10px 53px; } .documents-section__cards { margin-top: 196px; } .documents-section__background { inset-block-start: 55px; height: calc(100% - 55px); } .documents-section::after { background-position: 0 0, 0 55px; } }
