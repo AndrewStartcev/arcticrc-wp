@@ -50,6 +50,7 @@ $socials = arcticrc_socials();
 	</div>
 
 	<div class="page__container">
+<?php if ( arcticrc_home_block_visible( 'home_services_visible' ) ) : ?>
 		<section class="page__section page__section--services page__section--after-hero" id="services">
 			<div class="page-heading page-heading--section page-heading--services"><h2 class="page-heading__title"><?php echo esc_html( arcticrc_home_value( 'home_services_title', 'Наши услуги' ) ); ?></h2></div>
 			<div class="page__section-content"><div class="collection collection--services">
@@ -67,7 +68,9 @@ $socials = arcticrc_socials();
 				<?php endforeach; ?>
 			</div></div>
 		</section>
+<?php endif; ?>
 
+<?php if ( arcticrc_home_block_visible( 'home_geography_visible' ) ) : ?>
 		<section class="page__section page__section--map" id="geography">
 			<div class="page-heading page-heading--section page-heading--geography"><h2 class="page-heading__title"><?php echo esc_html( arcticrc_home_value( 'home_geography_title', 'Наша география — от Мурманска до Владивостока' ) ); ?></h2><p class="page-heading__lead"><?php echo esc_html( arcticrc_home_value( 'home_geography_lead', 'Оказываем услуги по всей территории России, в том числе в условиях крайнего Севера.' ) ); ?></p></div>
 			<div class="page__section-content"><div class="source-map source-map--geography" id="geography-map">
@@ -84,8 +87,10 @@ $socials = arcticrc_socials();
 				<?php endif; ?>
 			</div></div>
 		</section>
+<?php endif; ?>
 	</div>
 
+<?php if ( arcticrc_home_block_visible( 'home_clients_visible' ) ) : ?>
 	<section class="page__section page__section--clients" id="clients">
 		<div class="page__section-heading"><div class="page-heading page-heading--section page-heading--clients"><h2 class="page-heading__title"><?php echo esc_html( arcticrc_home_value( 'home_clients_title', 'Наши заказчики — ориентир в надёжности' ) ); ?></h2></div></div>
 		<div class="page__section-content page__section-content--full"><div class="record-rail record-rail--clients" data-record-rail aria-label="Наши заказчики — ориентир в надёжности">
@@ -108,7 +113,9 @@ $socials = arcticrc_socials();
 			</div>
 		</div></div>
 	</section>
+<?php endif; ?>
 
+<?php if ( arcticrc_home_block_visible( 'home_documents_visible' ) ) : ?>
 	<section class="documents-section" id="documents">
 		<?php $docs_desktop = arcticrc_image_url( arcticrc_home_value( 'home_documents_background_desktop', '' ), 'media/web/home-documents-desktop.webp' ); $docs_mobile = arcticrc_image_url( arcticrc_home_value( 'home_documents_background_mobile', '' ), 'media/web/home-documents-mobile.webp' ); ?>
 		<picture><source media="(max-width: 600px)" srcset="<?php echo esc_url( $docs_mobile ); ?>"><img class="documents-section__background" src="<?php echo esc_url( $docs_desktop ); ?>" alt="" loading="lazy" decoding="async"></picture>
@@ -116,7 +123,9 @@ $socials = arcticrc_socials();
 			<div class="documents-section__cards"><div class="collection collection--documents"><?php foreach ( (array) $documents as $index => $doc ) : ?><article class="document-card" id="document-<?php echo esc_attr( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?>"><h3 class="document-card__title"><?php echo esc_html( $doc['title'] ?? '' ); ?></h3><div class="document-card__details"><div class="document-card__metadata"><div class="document-card__fact"><span class="document-card__fact-label">тип</span><p><?php echo esc_html( $doc['type'] ?? '' ); ?></p></div><div class="document-card__fact"><span class="document-card__fact-label">вес</span><p><?php echo esc_html( $doc['weight'] ?? '' ); ?></p></div></div><?php if ( ! empty( $doc['file'] ) ) : $file_url = is_array( $doc['file'] ) ? ( $doc['file']['url'] ?? '' ) : wp_get_attachment_url( (int) $doc['file'] ); ?><a class="action action--primary document-card__action" href="<?php echo esc_url( $file_url ); ?>" target="_blank" rel="noopener"><span class="action__marker" aria-hidden="true"></span><span class="action__label">Посмотреть файл</span></a><?php else : ?><button class="action action--primary document-card__action" type="button"><span class="action__marker" aria-hidden="true"></span><span class="action__label">Посмотреть файл</span></button><?php endif; ?></div></article><?php endforeach; ?></div></div>
 		</div>
 	</section>
+<?php endif; ?>
 
+<?php if ( arcticrc_home_block_visible( 'home_contact_visible' ) ) : ?>
 	<div class="page__container"><section class="enquiry-section" id="request" aria-label="Связаться с нами">
 		<div class="contact-details contact-details--shared"><div class="contact-details__heading"><div class="page-heading page-heading--section"><h2 class="page-heading__title"><?php echo esc_html( arcticrc_home_value( 'home_contact_title', 'Начнем с разговора — доведем до результата' ) ); ?></h2></div></div><p class="contact-details__intro"><?php echo esc_html( arcticrc_home_value( 'home_contact_intro', '' ) ); ?></p><div class="contact-details__rows">
 			<div class="contact-details__row"><div class="contact-details__value"><span class="contact-details__label">телефон</span><a class="contact-details__link" href="<?php echo esc_url( 'tel:' . arcticrc_phone_href( $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a></div><div class="contact-details__actions"><?php foreach ( $socials as $social ) : ?><a class="action action--outline action--compact action--social contact-details__action contact-details__action--social" href="<?php echo esc_url( $social['url'] ); ?>" aria-label="<?php echo esc_attr( $social['name'] ); ?>"><span class="action__marker contact-details__channel-marker" aria-hidden="true"></span><span class="action__label"><?php if ( $social['icon'] ) : ?><img class="contact-details__channel-icon" src="<?php echo esc_url( $social['icon'] ); ?>" alt=""><?php endif; ?><span class="contact-details__channel-label"><?php echo esc_html( $social['name'] ); ?></span></span></a><?php endforeach; ?></div></div>
@@ -125,5 +134,6 @@ $socials = arcticrc_socials();
 		</div></div>
 		<?php echo arcticrc_cf7_form_html( 'consultation', 'consultation', 'enquiry-form enquiry-form--consultation enquiry-section__form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</section></div>
+<?php endif; ?>
 </main>
 <?php get_footer(); ?>
