@@ -212,14 +212,6 @@ function arcticrc_clean_dashboard() {
 add_action( 'wp_dashboard_setup', 'arcticrc_clean_dashboard' );
 
 /**
- * Remove the WordPress version from the admin footer.
- */
-function arcticrc_admin_footer_version() {
-	return '';
-}
-add_filter( 'update_footer', 'arcticrc_admin_footer_version', 100 );
-
-/**
  * Remove the generic WordPress welcome panel.
  */
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
@@ -252,3 +244,17 @@ function arcticrc_hide_managed_page_editor() {
 	}
 }
 add_action( 'admin_init', 'arcticrc_hide_managed_page_editor', 50 );
+
+
+/**
+ * Keep the native WordPress admin footer.
+ *
+ * Plugins or legacy code may replace the left footer text with custom
+ * developer branding. Clear those filters so WordPress renders its own
+ * default footer text, and do not override the core version on the right.
+ */
+function arcticrc_restore_default_admin_footer() {
+	remove_all_filters( 'admin_footer_text' );
+	remove_all_filters( 'update_footer' );
+}
+add_action( 'admin_init', 'arcticrc_restore_default_admin_footer', 999 );
