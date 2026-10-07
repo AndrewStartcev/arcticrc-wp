@@ -159,13 +159,12 @@ while ( have_posts() ) :
 						</div>
 						<div class="record-rail__track" data-rail-track>
 							<?php foreach ( $projects as $index => $project ) :
-								$project = get_post( $project );
-								if ( ! $project ) { continue; }
-								$image = get_the_post_thumbnail_url( $project->ID, 'large' );
+								$image = arcticrc_image_url( $project['image'] ?? '' );
+								$title = $project['title'] ?? '';
 								?>
 								<article class="project-card" id="project-<?php echo esc_attr( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?>" data-rail-item>
-									<?php if ( $image ) : ?><img class="project-card__image" src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( get_the_title( $project ) ); ?>" loading="lazy" decoding="async"><?php endif; ?>
-									<h3 class="project-card__title"><?php echo esc_html( get_the_title( $project ) ); ?></h3>
+									<?php if ( $image ) : ?><img class="project-card__image" src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy" decoding="async"><?php endif; ?>
+									<h3 class="project-card__title"><?php echo esc_html( $title ); ?></h3>
 								</article>
 							<?php endforeach; ?>
 						</div>
