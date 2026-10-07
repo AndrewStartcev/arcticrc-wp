@@ -43,28 +43,6 @@ function arcticrc_breadcrumb_items() {
 	}
 
 
-	if ( is_singular( 'project' ) ) {
-		$items[] = array(
-			'label' => 'Проекты',
-			'url'   => get_post_type_archive_link( 'project' ),
-		);
-
-		$items[] = array(
-			'label' => get_the_title(),
-			'url'   => '',
-		);
-
-		return $items;
-	}
-
-	if ( is_post_type_archive( 'project' ) ) {
-		$items[] = array(
-			'label' => 'Проекты',
-			'url'   => '',
-		);
-
-		return $items;
-	}
 
 	if ( is_page() ) {
 		$post = get_queried_object();
