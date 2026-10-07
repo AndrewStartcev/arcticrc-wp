@@ -109,9 +109,11 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": [],
+    "hide_on_screen": [
+        "the_content"
+    ],
     "active": true,
     "description": "Настройки обычной страницы /services/.",
     "show_in_rest": 0,
-    "modified": 1791399000
+    "modified": 1791400200
 }
