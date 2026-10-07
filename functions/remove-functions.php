@@ -223,3 +223,32 @@ add_filter( 'update_footer', 'arcticrc_admin_footer_version', 100 );
  * Remove the generic WordPress welcome panel.
  */
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
+
+
+/**
+ * Managed layout pages are edited through ACF only.
+ */
+function arcticrc_hide_managed_page_editor() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	$post_id = 0;
+
+	if ( isset( $_GET['post'] ) ) {
+		$post_id = absint( $_GET['post'] );
+	} elseif ( isset( $_POST['post_ID'] ) ) {
+		$post_id = absint( $_POST['post_ID'] );
+	}
+
+	if ( ! $post_id || 'page' !== get_post_type( $post_id ) ) {
+		return;
+	}
+
+	$template = get_page_template_slug( $post_id );
+
+	if ( 'page-services.php' === $template ) {
+		remove_post_type_support( 'page', 'editor' );
+	}
+}
+add_action( 'admin_init', 'arcticrc_hide_managed_page_editor', 50 );
