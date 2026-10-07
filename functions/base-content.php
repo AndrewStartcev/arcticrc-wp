@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-9';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-10';
 
 
 /**
@@ -397,12 +397,16 @@ function arcticrc_seed_base_content() {
 
 	$home_id     = arcticrc_seed_page( 'home', 'Главная', 'index.html', 0 );
 	$services_id = arcticrc_seed_page( 'services', 'Услуги', '', 10 );
-	arcticrc_seed_page( 'contacts', 'Контакты', 'contacts.html', 40 );
+	$contacts_id = arcticrc_seed_page( 'contacts', 'Контакты', '', 40 );
 	arcticrc_seed_page( 'equipment-rent', 'Аренда оборудования и спецтехники', 'equipment-rent.html', 20 );
 	arcticrc_seed_page( 'equipment-sale', 'Продажа оборудования и спецтехники', 'equipment-sale.html', 30 );
 
 	if ( $services_id ) {
 		update_post_meta( $services_id, '_wp_page_template', 'page-services.php' );
+	}
+
+	if ( $contacts_id ) {
+		update_post_meta( $contacts_id, '_wp_page_template', 'page-contacts.php' );
 	}
 
 	arcticrc_seed_service(
