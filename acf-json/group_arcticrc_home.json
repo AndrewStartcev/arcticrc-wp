@@ -7,7 +7,7 @@
             "label": "Hero",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -81,8 +81,19 @@
             "label": "Услуги",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_home_services_visible",
+            "label": "Показывать блок",
+            "name": "home_services_visible",
+            "type": "true_false",
+            "instructions": "Выключите, чтобы полностью скрыть блок на сайте.",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
         },
         {
             "key": "field_arcticrc_home_services_title",
@@ -147,8 +158,19 @@
             "label": "География",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_home_geo_visible",
+            "label": "Показывать блок",
+            "name": "home_geography_visible",
+            "type": "true_false",
+            "instructions": "Выключите, чтобы полностью скрыть блок на сайте.",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
         },
         {
             "key": "field_arcticrc_home_geo_title",
@@ -354,8 +376,19 @@
             "label": "Заказчики",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_home_clients_visible",
+            "label": "Показывать блок",
+            "name": "home_clients_visible",
+            "type": "true_false",
+            "instructions": "Выключите, чтобы полностью скрыть блок на сайте.",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
         },
         {
             "key": "field_arcticrc_home_clients_title",
@@ -393,8 +426,19 @@
             "label": "Документация",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_home_docs_visible",
+            "label": "Показывать блок",
+            "name": "home_documents_visible",
+            "type": "true_false",
+            "instructions": "Выключите, чтобы полностью скрыть блок на сайте.",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
         },
         {
             "key": "field_arcticrc_home_docs_title",
@@ -488,8 +532,19 @@
             "label": "Контакты",
             "name": "",
             "type": "tab",
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_home_contact_visible",
+            "label": "Показывать блок",
+            "name": "home_contact_visible",
+            "type": "true_false",
+            "instructions": "Выключите, чтобы полностью скрыть блок на сайте.",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
         },
         {
             "key": "field_arcticrc_home_contact_title",
@@ -535,5 +590,5 @@
     "active": true,
     "description": "Контент главной страницы ArcticRC.",
     "show_in_rest": 0,
-    "modified": 1791387000
+    "modified": 1791390000
 }
