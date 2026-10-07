@@ -46,29 +46,6 @@ function arcticrc_register_content_types() {
 		)
 	);
 
-	register_post_type(
-		'project',
-		array(
-			'labels' => array(
-				'name'          => 'Проекты',
-				'singular_name' => 'Проект',
-				'add_new_item'  => 'Добавить проект',
-				'edit_item'     => 'Редактировать проект',
-			),
-			'public'             => false,
-			'publicly_queryable' => false,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'show_in_rest'       => false,
-			'query_var'          => false,
-			'exclude_from_search'=> true,
-			'menu_icon'          => 'dashicons-portfolio',
-			'has_archive'        => false,
-			'rewrite'            => false,
-			'supports'     => array( 'title', 'excerpt', 'thumbnail', 'page-attributes' ),
-		)
-	);
-
 	register_taxonomy(
 		'equipment_mode',
 		array( 'equipment' ),
