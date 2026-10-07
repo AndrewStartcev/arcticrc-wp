@@ -1,0 +1,202 @@
+{
+    "key": "group_arcticrc_contacts_page",
+    "title": "Страница контактов",
+    "fields": [
+        {
+            "key": "field_arcticrc_contacts_tab_main",
+            "label": "Главный экран",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_contacts_title",
+            "label": "H1",
+            "name": "contacts_title",
+            "type": "text",
+            "default_value": "Связь с теми, кто не подводит"
+        },
+        {
+            "key": "field_arcticrc_contacts_tab_contact",
+            "label": "Контакты и форма",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_contacts_contact_visible",
+            "label": "Показывать блок",
+            "name": "contacts_contact_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_contacts_intro",
+            "label": "Описание",
+            "name": "contacts_intro",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис!\n\nМы ответим на ваши вопросы"
+        },
+        {
+            "key": "field_arcticrc_contacts_global_note",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "message": "Телефон, e-mail, адрес офиса и соцсети берутся из глобальных настроек «Сайт». Здесь они не дублируются."
+        },
+        {
+            "key": "field_arcticrc_contacts_tab_map",
+            "label": "Карта",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_contacts_map_visible",
+            "label": "Показывать блок",
+            "name": "contacts_map_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_contacts_map_mode",
+            "label": "Что показывать",
+            "name": "contacts_map_mode",
+            "type": "button_group",
+            "choices": {
+                "image": "Картинка",
+                "map": "Яндекс.Карта"
+            },
+            "default_value": "image",
+            "return_format": "value"
+        },
+        {
+            "key": "field_arcticrc_contacts_map_image",
+            "label": "Картинка карты",
+            "name": "contacts_map_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "large",
+            "library": "all",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_arcticrc_contacts_map_mode",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_arcticrc_contacts_map_note",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "message": "Интерактивная Яндекс.Карта подгружается автоматически. API-ключ задаётся в «Сайт → Интеграции».",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_arcticrc_contacts_map_mode",
+                        "operator": "==",
+                        "value": "map"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_arcticrc_contacts_map_lat",
+            "label": "Широта",
+            "name": "contacts_map_lat",
+            "type": "text",
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_arcticrc_contacts_map_mode",
+                        "operator": "==",
+                        "value": "map"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_arcticrc_contacts_map_lng",
+            "label": "Долгота",
+            "name": "contacts_map_lng",
+            "type": "text",
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_arcticrc_contacts_map_mode",
+                        "operator": "==",
+                        "value": "map"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_arcticrc_contacts_map_zoom",
+            "label": "Масштаб",
+            "name": "contacts_map_zoom",
+            "type": "number",
+            "default_value": 16,
+            "min": 1,
+            "max": 19,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_arcticrc_contacts_map_mode",
+                        "operator": "==",
+                        "value": "map"
+                    }
+                ]
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-contacts.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Настройки страницы /contacts/.",
+    "show_in_rest": 0,
+    "modified": 1791401000
+}
