@@ -251,6 +251,11 @@
 
     initialized.add(form);
 
+    const purpose = form.querySelector('[name="purpose"]');
+    if (purpose && form.dataset.purpose) {
+      purpose.value = form.dataset.purpose;
+    }
+
     form.querySelectorAll('input[type="tel"]').forEach(initPhoneInput);
 
     // This listener is deliberately registered before a checked consent can
