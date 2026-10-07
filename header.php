@@ -17,6 +17,10 @@ $primary_items = arcticrc_menu_items( 'primary' );
 <body <?php body_class( 'site' ); ?>>
 <?php wp_body_open(); ?>
 <a class="site__skip" href="#main">К содержимому</a>
+<?php if ( $is_overlay ) : ?>
+<div class="<?php echo esc_attr( arcticrc_overlay_page_class() ); ?>">
+	<div class="page__header page__header--overlay">
+<?php endif; ?>
 <header class="site-header <?php echo $is_overlay ? 'site-header--on-media' : 'site-header--on-light'; ?>">
 	<a class="site-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Главная">
 		<img class="site-header__logo" src="<?php echo esc_url( arcticrc_asset_url( $logo ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="240" height="73">
@@ -49,3 +53,6 @@ $primary_items = arcticrc_menu_items( 'primary' );
 		</nav>
 	</details>
 </header>
+<?php if ( $is_overlay ) : ?>
+	</div>
+<?php endif; ?>
