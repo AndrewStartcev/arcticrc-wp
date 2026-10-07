@@ -33,6 +33,17 @@ function arcticrc_register_options_page() {
 			'icon_url'   => 'dashicons-admin-site-alt3',
 		)
 	);
+
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Настройки страницы услуг',
+			'menu_title'  => 'Настройки страницы',
+			'menu_slug'   => 'arcticrc-services-page',
+			'parent_slug' => 'edit.php?post_type=service',
+			'capability'  => 'edit_pages',
+			'redirect'    => false,
+		)
+	);
 }
 add_action( 'acf/init', 'arcticrc_register_options_page' );
 
