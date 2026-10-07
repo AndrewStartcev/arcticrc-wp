@@ -7,6 +7,8 @@ foreach ( array(
 	'/functions/acf.php',
 	'/functions/helpers.php',
 	'/functions/post-types.php',
+	'/functions/breadcrumbs.php',
+	'/functions/contact-form.php',
 	'/functions/base-content.php',
 	'/functions/remove-functions.php',
 ) as $arcticrc_file ) {
