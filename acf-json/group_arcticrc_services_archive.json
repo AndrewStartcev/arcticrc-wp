@@ -1,0 +1,117 @@
+{
+    "key": "group_arcticrc_services_archive",
+    "title": "Страница услуг",
+    "fields": [
+        {
+            "key": "field_arcticrc_services_tab_main",
+            "label": "Основное",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_services_archive_title",
+            "label": "H1",
+            "name": "services_archive_title",
+            "type": "text",
+            "default_value": "Уверенность начинается с основания"
+        },
+        {
+            "key": "field_arcticrc_services_tab_cards",
+            "label": "Услуги",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_services_archive_visible",
+            "label": "Показывать блок",
+            "name": "services_archive_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_services_archive_items",
+            "label": "Услуги",
+            "name": "services_archive_items",
+            "type": "relationship",
+            "instructions": "Выберите услуги и порядок вывода. Обложка и номер берутся автоматически из записи.",
+            "post_type": [
+                "service"
+            ],
+            "filters": [
+                "search"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "return_format": "object"
+        },
+        {
+            "key": "field_arcticrc_services_tab_contact",
+            "label": "Контакты",
+            "name": "",
+            "type": "tab",
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_arcticrc_services_contact_visible",
+            "label": "Показывать блок",
+            "name": "services_contact_visible",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Показывать",
+            "ui_off_text": "Скрыть"
+        },
+        {
+            "key": "field_arcticrc_services_contact_title",
+            "label": "Заголовок",
+            "name": "services_contact_title",
+            "type": "text",
+            "default_value": "Начнем с разговора — доведем до результата",
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_arcticrc_services_contact_intro",
+            "label": "Описание",
+            "name": "services_contact_intro",
+            "type": "textarea",
+            "rows": 3,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "arcticrc-services-page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Настройки страницы /services/.",
+    "show_in_rest": 0,
+    "modified": 1791396000
+}
