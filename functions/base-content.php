@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-4';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-5';
 
 
 /**
@@ -292,8 +292,6 @@ function arcticrc_seed_global_options() {
 		'field_arcticrc_site_kpp'           => '772101001',
 		'field_arcticrc_site_legal_address' => 'г. Москва, ул Михайлова, д 31А, кв 404',
 		'field_arcticrc_copyright'          => 'Все права защищены',
-		'field_arcticrc_privacy_url'        => '/policy/',
-		'field_arcticrc_personal_data_url'  => '/privacy/',
 	);
 
 	foreach ( $values as $field_key => $value ) {
@@ -302,6 +300,16 @@ function arcticrc_seed_global_options() {
 		if ( null === $current || '' === $current || false === $current ) {
 			update_field( $field_key, $value, 'option' );
 		}
+	}
+
+	$policy_page = get_page_by_path( 'policy', OBJECT, 'page' );
+	if ( $policy_page && ! get_field( 'field_arcticrc_privacy_url', 'option' ) ) {
+		update_field( 'field_arcticrc_privacy_url', $policy_page->ID, 'option' );
+	}
+
+	$privacy_page = get_page_by_path( 'privacy', OBJECT, 'page' );
+	if ( $privacy_page && ! get_field( 'field_arcticrc_personal_data_url', 'option' ) ) {
+		update_field( 'field_arcticrc_personal_data_url', $privacy_page->ID, 'option' );
 	}
 
 	if ( $logo_light_id && ! get_field( 'field_arcticrc_logo_light', 'option' ) ) {
