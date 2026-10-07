@@ -138,10 +138,9 @@ function arcticrc_socials() {
 		}
 
 		$normalized[] = array(
-			'name'      => $name,
-			'url'       => $url,
-			'link_text' => ! empty( $social['link_text'] ) ? $social['link_text'] : $name,
-			'icon'      => arcticrc_image_url(
+			'name' => $name,
+			'url'  => $url,
+			'icon' => arcticrc_image_url(
 				isset( $social['icon'] ) ? $social['icon'] : '',
 				''
 			) ?: arcticrc_social_fallback_icon( $name ),
