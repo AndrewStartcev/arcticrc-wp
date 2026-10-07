@@ -6,3 +6,8 @@
 .source-map__image--location { height: min(473px, 127.8378cqw); }
 .source-map__image--geography { height: min(731px, 136.2162cqw, calc(419.162px + 22.9293cqw)); }
 @media (max-width: 600px) { .source-map--location { margin-top: 30px; } }
+
+.source-map__interactive { width: 100%; background: #eef3f5; overflow: hidden; }
+.source-map__interactive--geography { height: min(731px, 136.2162cqw, calc(419.162px + 22.9293cqw)); min-height: 360px; }
+.source-map__interactive [class*="ground-pane"] { filter: saturate(.78) contrast(.96); }
+@media (max-width: 600px) { .source-map__interactive--geography { min-height: 504px; height: 136.2162cqw; } }
