@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-7';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-8';
 
 
 /**
@@ -395,10 +395,15 @@ function arcticrc_seed_base_content() {
 		return;
 	}
 
-	$home_id = arcticrc_seed_page( 'home', 'Главная', 'index.html', 0 );
+	$home_id     = arcticrc_seed_page( 'home', 'Главная', 'index.html', 0 );
+	$services_id = arcticrc_seed_page( 'services', 'Услуги', 'services.html', 10 );
 	arcticrc_seed_page( 'contacts', 'Контакты', 'contacts.html', 40 );
 	arcticrc_seed_page( 'equipment-rent', 'Аренда оборудования и спецтехники', 'equipment-rent.html', 20 );
 	arcticrc_seed_page( 'equipment-sale', 'Продажа оборудования и спецтехники', 'equipment-sale.html', 30 );
+
+	if ( $services_id ) {
+		update_post_meta( $services_id, '_wp_page_template', 'page-services.php' );
+	}
 
 	arcticrc_seed_service(
 		'soil-testing',
