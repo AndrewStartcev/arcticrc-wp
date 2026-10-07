@@ -10,7 +10,80 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-2';
+const ARCTICRC_CONTENT_SEED_VERSION = '2026-10-07-3';
+
+
+/**
+ * Register an existing theme asset in the Media Library once.
+ */
+function arcticrc_seed_media_asset( $relative_path, $title = '' ) {
+	$relative_path = ltrim( $relative_path, '/' );
+	$source        = get_template_directory() . '/assets/' . $relative_path;
+
+	if ( ! is_readable( $source ) ) {
+		return 0;
+	}
+
+	$existing = get_posts(
+		array(
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'meta_key'       => '_arcticrc_seed_asset',
+			'meta_value'     => $relative_path,
+		)
+	);
+
+	if ( $existing ) {
+		return (int) $existing[0];
+	}
+
+	$filename = basename( $source );
+	$bytes    = file_get_contents( $source );
+
+	if ( false === $bytes ) {
+		return 0;
+	}
+
+	$upload = wp_upload_bits( $filename, null, $bytes );
+
+	if ( ! empty( $upload['error'] ) ) {
+		return 0;
+	}
+
+	$filetype = wp_check_filetype( $filename );
+	$mime     = $filetype['type'];
+
+	if ( ! $mime && 'svg' === strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) ) ) {
+		$mime = 'image/svg+xml';
+	}
+
+	$attachment_id = wp_insert_attachment(
+		array(
+			'post_mime_type' => $mime ?: 'application/octet-stream',
+			'post_title'     => $title ?: pathinfo( $filename, PATHINFO_FILENAME ),
+			'post_status'    => 'inherit',
+		),
+		$upload['file']
+	);
+
+	if ( is_wp_error( $attachment_id ) ) {
+		return 0;
+	}
+
+	update_post_meta( $attachment_id, '_arcticrc_seed_asset', $relative_path );
+
+	if ( 'image/svg+xml' !== $mime ) {
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		$metadata = wp_generate_attachment_metadata( $attachment_id, $upload['file'] );
+		if ( $metadata ) {
+			wp_update_attachment_metadata( $attachment_id, $metadata );
+		}
+	}
+
+	return (int) $attachment_id;
+}
 
 /**
  * Read the <main> block from a static source file and adapt paths to WordPress.
@@ -162,6 +235,11 @@ function arcticrc_seed_global_options() {
 		return;
 	}
 
+	$logo_light_id = arcticrc_seed_media_asset( 'media/web/logo-99-4083.svg', 'Логотип ArcticRC — светлый' );
+	$logo_blue_id  = arcticrc_seed_media_asset( 'media/web/logo-99-1171.svg', 'Логотип ArcticRC — синий' );
+	$telegram_icon = arcticrc_seed_media_asset( 'media/web/social-telegram.svg', 'Telegram' );
+	$whatsapp_icon = arcticrc_seed_media_asset( 'media/web/social-whatsapp.svg', 'WhatsApp' );
+
 	$values = array(
 		'field_arcticrc_site_phone'         => '+7(916)-616-02-20',
 		'field_arcticrc_site_email'         => 'engineering@arcticrc.ru',
@@ -183,28 +261,47 @@ function arcticrc_seed_global_options() {
 		}
 	}
 
+	if ( $logo_light_id && ! get_field( 'field_arcticrc_logo_light', 'option' ) ) {
+		update_field( 'field_arcticrc_logo_light', $logo_light_id, 'option' );
+	}
+
+	if ( $logo_blue_id && ! get_field( 'field_arcticrc_logo_blue', 'option' ) ) {
+		update_field( 'field_arcticrc_logo_blue', $logo_blue_id, 'option' );
+	}
+
 	$socials = get_field( 'field_arcticrc_site_socials', 'option' );
 
 	if ( empty( $socials ) || ! is_array( $socials ) ) {
-		update_field(
-			'field_arcticrc_site_socials',
+		$socials = array(
 			array(
-				array(
-					'field_arcticrc_social_icon'      => '',
-					'field_arcticrc_social_name'      => 'Telegram',
-					'field_arcticrc_social_url'       => 'https://telegram.org/',
-					'field_arcticrc_social_link_text' => 'Telegram',
-				),
-				array(
-					'field_arcticrc_social_icon'      => '',
-					'field_arcticrc_social_name'      => 'WhatsApp',
-					'field_arcticrc_social_url'       => 'https://www.whatsapp.com/',
-					'field_arcticrc_social_link_text' => 'WhatsApp',
-				),
+				'field_arcticrc_social_icon'      => $telegram_icon,
+				'field_arcticrc_social_name'      => 'Telegram',
+				'field_arcticrc_social_url'       => 'https://telegram.org/',
+				'field_arcticrc_social_link_text' => 'Telegram',
 			),
-			'option'
+			array(
+				'field_arcticrc_social_icon'      => $whatsapp_icon,
+				'field_arcticrc_social_name'      => 'WhatsApp',
+				'field_arcticrc_social_url'       => 'https://www.whatsapp.com/',
+				'field_arcticrc_social_link_text' => 'WhatsApp',
+			),
 		);
+	} else {
+		foreach ( $socials as &$social ) {
+			$name = strtolower( isset( $social['name'] ) ? $social['name'] : '' );
+
+			if ( empty( $social['icon'] ) && false !== strpos( $name, 'telegram' ) ) {
+				$social['icon'] = $telegram_icon;
+			}
+
+			if ( empty( $social['icon'] ) && false !== strpos( $name, 'whatsapp' ) ) {
+				$social['icon'] = $whatsapp_icon;
+			}
+		}
+		unset( $social );
 	}
+
+	update_field( 'field_arcticrc_site_socials', $socials, 'option' );
 }
 
 /**
