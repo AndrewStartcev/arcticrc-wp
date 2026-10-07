@@ -311,3 +311,54 @@ function arcticrc_seed_soil_testing_service() {
 	update_post_meta( $post_id, '_arcticrc_service_seed_version', ARCTICRC_SERVICE_SEED_VERSION );
 }
 add_action( 'admin_init', 'arcticrc_seed_soil_testing_service', 45 );
+
+
+function arcticrc_seed_services_archive_settings() {
+	if ( ! is_admin() || ! current_user_can( 'manage_options' ) || ! function_exists( 'update_field' ) ) {
+		return;
+	}
+
+	$defaults = array(
+		'field_arcticrc_services_archive_title'  => 'Уверенность начинается с основания',
+		'field_arcticrc_services_contact_title'  => 'Начнем с разговора — доведем до результата',
+		'field_arcticrc_services_contact_intro'  => 'Свяжитесь с нами по телефону, оставьте заявку на консультацию или приезжайте в офис! Мы ответим на ваши вопросы',
+	);
+
+	foreach ( $defaults as $field_key => $value ) {
+		$current = get_field( $field_key, 'option' );
+
+		if ( null === $current || '' === $current ) {
+			update_field( $field_key, $value, 'option' );
+		}
+	}
+
+	if ( ! get_field( 'field_arcticrc_services_archive_items', 'option' ) ) {
+		$services = get_posts(
+			array(
+				'post_type'      => 'service',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'title'      => 'ASC',
+				),
+				'fields'         => 'ids',
+			)
+		);
+
+		if ( $services ) {
+			update_field( 'field_arcticrc_services_archive_items', $services, 'option' );
+		}
+	}
+}
+add_action( 'admin_init', 'arcticrc_seed_services_archive_settings', 46 );
+
+function arcticrc_services_archive_block_visible( $field_name ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return true;
+	}
+
+	$value = get_field( $field_name, 'option' );
+
+	return false !== $value && '0' !== (string) $value;
+}
