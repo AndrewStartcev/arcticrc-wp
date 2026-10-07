@@ -5,6 +5,7 @@ $phone         = arcticrc_option( 'site_phone', '+7(916)-616-02-20' );
 $socials       = arcticrc_socials();
 $is_overlay    = arcticrc_header_is_media();
 $logo_url      = arcticrc_header_logo_url();
+$menu_logo_url = arcticrc_image_url( arcticrc_option( 'site_logo_blue', '' ), 'media/web/logo-99-1171.svg' );
 $primary_items = arcticrc_menu_items( 'primary' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -20,7 +21,7 @@ $primary_items = arcticrc_menu_items( 'primary' );
 <div class="<?php echo esc_attr( arcticrc_overlay_page_class() ); ?>">
 	<div class="page__header page__header--overlay">
 <?php endif; ?>
-<header class="site-header <?php echo $is_overlay ? 'site-header--on-media' : 'site-header--on-light'; ?>">
+<header class="site-header <?php echo $is_overlay ? 'site-header--on-media' : 'site-header--on-light'; ?>" style="--header-menu-logo: url('<?php echo esc_url( $menu_logo_url ); ?>');">
 	<a class="site-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Главная">
 		<img class="site-header__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="240" height="73">
 	</a>
