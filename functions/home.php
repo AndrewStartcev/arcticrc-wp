@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const ARCTICRC_HOME_SEED_VERSION = '2026-10-07-2';
+const ARCTICRC_HOME_SEED_VERSION = '2026-10-07-3';
 
 function arcticrc_home_page_id() {
 	$page_id = (int) get_option( 'page_on_front' );
@@ -123,15 +123,9 @@ function arcticrc_seed_home_content() {
 
 	if ( ! get_field( 'field_arcticrc_home_services', $page_id ) ) {
 		$service = get_page_by_path( 'soil-testing', OBJECT, 'service' );
-		$rows    = array();
-		for ( $index = 0; $index < 6; $index++ ) {
-			$rows[] = array(
-				'field_arcticrc_home_service_post'   => $service ? $service->ID : 0,
-				'field_arcticrc_home_service_image'  => $assets['service'],
-				'field_arcticrc_home_service_number' => '/01',
-			);
+		if ( $service ) {
+			update_field( 'field_arcticrc_home_services', array( $service->ID ), $page_id );
 		}
-		update_field( 'field_arcticrc_home_services', $rows, $page_id );
 	}
 
 	if ( ! get_field( 'field_arcticrc_home_clients', $page_id ) ) {
