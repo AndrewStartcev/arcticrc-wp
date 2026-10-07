@@ -493,7 +493,23 @@ function arcticrc_apply_global_markup( $markup ) {
 		}
 	}
 
-	return strtr( $markup, $replacements );
+	$markup = strtr( $markup, $replacements );
+
+	if ( function_exists( 'arcticrc_breadcrumbs' ) ) {
+		$breadcrumbs = arcticrc_breadcrumbs( false );
+
+		$markup = preg_replace(
+			'/<nav\\b[^>]*class="[^"]*\\bbreadcrumbs\\b[^"]*"[^>]*>.*?<\\/nav>/si',
+			$breadcrumbs,
+			$markup
+		);
+	}
+
+	if ( function_exists( 'arcticrc_cf7_replace_source_forms' ) ) {
+		$markup = arcticrc_cf7_replace_source_forms( $markup );
+	}
+
+	return $markup;
 }
 
 /**
